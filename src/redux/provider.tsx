@@ -3,7 +3,7 @@
 import * as React from "react";
 
 import { HeroUIProvider } from "@heroui/react";
-import { NaavbarSection } from "@/component/2-sections";
+import { FooterSection, NaavbarSection } from "@/component/2-sections";
 
 export function Provider({ children }: Readonly<{
     children: React.ReactNode;
@@ -12,6 +12,7 @@ export function Provider({ children }: Readonly<{
         <HeroUIProvider>
             <NaavbarSection />
             {children}
+            <FooterSection />
         </HeroUIProvider>
     );
 }

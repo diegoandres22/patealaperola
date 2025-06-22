@@ -85,24 +85,38 @@ export const NaavbarSection = () => {
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu className='items-center justify-center'>
+      <NavbarMenu className=' justify-center bg-black'>
 
         <NavbarMenuItem key={0}>
-          <Link className=" cursor-pointer" size="lg"  >
+          <Link className=" cursor-pointer text-white" size="lg"  >
+            PARTICIPAR YA
+          </Link>
+        </NavbarMenuItem>
+
+        <NavbarMenuItem key={1}>
+          <Link className=" cursor-pointer text-white" size="lg"  >
             Ganadores
           </Link>
         </NavbarMenuItem>
 
-        <NavbarMenuItem key={0}>
-          <Link className=" cursor-pointer" size="lg"  >
+        <NavbarMenuItem key={2}>
+          <Link className=" cursor-pointer text-white" size="lg"  >
             Quienes somos y permisos
           </Link>
         </NavbarMenuItem>
-        <NavbarMenuItem key={0}>
-          <Link className=" cursor-pointer" size="lg"  >
+
+        <NavbarMenuItem key={3}>
+          <Link className=" cursor-pointer text-white" size="lg"  >
             Contactar
           </Link>
         </NavbarMenuItem>
+
+        <NavbarMenuItem key={3}>
+          <Link className=" cursor-pointer text-white" size="lg"  >
+            Preguntas frecuentes
+          </Link>
+        </NavbarMenuItem>
+
       </NavbarMenu>
     </Navbar>
   );
