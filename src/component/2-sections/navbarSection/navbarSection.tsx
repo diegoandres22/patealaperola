@@ -12,7 +12,7 @@ import {
   Tooltip,
 } from "@heroui/react";
 import { Image } from "@heroui/image";
-import { IconAward, IconId, IconMessage } from '@tabler/icons-react';
+import { IconAward, IconId, IconMessage, IconZoomQuestion } from '@tabler/icons-react';
 
 
 export const NaavbarSection = () => {
@@ -79,13 +79,21 @@ export const NaavbarSection = () => {
           </Tooltip>
         </NavbarItem>
 
+        <NavbarItem>
+          <Tooltip content="Preguntas frecuentes" showArrow={true} className='text-black' placement='bottom-end'>
+            <Button isIconOnly aria-label="Preguntas frecuentes" variant="light" >
+              <IconZoomQuestion className='text-white ' stroke={2} />
+            </Button>
+          </Tooltip>
+        </NavbarItem>
+
       </NavbarContent>
 
       <NavbarContent className="sm:hidden" justify="center">
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarMenu className=' justify-center bg-black'>
+      <NavbarMenu className=' justify-center bg-transparent gap-4'>
 
         <NavbarMenuItem key={0}>
           <Link className=" cursor-pointer text-white" size="lg"  >
