@@ -1,0 +1,109 @@
+import React from 'react'
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+  Tooltip,
+} from "@heroui/react";
+import { Image } from "@heroui/image";
+import { IconAward, IconId, IconMessage } from '@tabler/icons-react';
+
+
+export const NaavbarSection = () => {
+
+  return (
+    <Navbar className='bg-black bg-transparent' isBlurred>
+
+      <NavbarContent className="sm:hidden max-w-14 " justify="start">
+        <NavbarBrand>
+
+          <Image
+            src="./isologo.png"
+            width={100}
+            height={40}
+            alt="Marca del sitio"
+            className='cursor-pointer'
+          />
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex" justify="start">
+        <NavbarBrand>
+          <Image
+            src="./isologo.png"
+            width={120}
+            height={70}
+            alt="Marca del sitio"
+            className='cursor-pointer'
+
+          />
+        </NavbarBrand>
+      </NavbarContent>
+
+
+
+      <NavbarContent justify="end" className='hidden sm:flex'>
+        <NavbarItem >
+          <Button color="primary" className='font-bold' variant="shadow" aria-label="Participar ya">
+            Participar ya
+          </Button>
+        </NavbarItem>
+
+        <NavbarItem>
+          <Tooltip content="Ganadores" showArrow={true} className='text-black'>
+            <Button isIconOnly aria-label="Contactar" variant="light" >
+              <IconAward className='text-white' stroke={2} />
+            </Button>
+          </Tooltip>
+        </NavbarItem>
+
+        <NavbarItem >
+          <Tooltip content="Quienes somos y Permisos" showArrow={true} className='text-black'>
+            <Button isIconOnly aria-label="Quienes somos y Permisos" variant="light" >
+              <IconId stroke={2} className='text-white' />
+            </Button>
+          </Tooltip>
+        </NavbarItem>
+
+        <NavbarItem>
+          <Tooltip content="Contactar" showArrow={true} className='text-black'>
+            <Button isIconOnly aria-label="Contactar" variant="light" >
+              <IconMessage className='text-white' stroke={2} />
+            </Button>
+          </Tooltip>
+        </NavbarItem>
+
+      </NavbarContent>
+
+      <NavbarContent className="sm:hidden" justify="center">
+        <NavbarMenuToggle />
+      </NavbarContent>
+
+      <NavbarMenu className='items-center justify-center'>
+
+        <NavbarMenuItem key={0}>
+          <Link className=" cursor-pointer" size="lg"  >
+            Ganadores
+          </Link>
+        </NavbarMenuItem>
+
+        <NavbarMenuItem key={0}>
+          <Link className=" cursor-pointer" size="lg"  >
+            Quienes somos y permisos
+          </Link>
+        </NavbarMenuItem>
+        <NavbarMenuItem key={0}>
+          <Link className=" cursor-pointer" size="lg"  >
+            Contactar
+          </Link>
+        </NavbarMenuItem>
+      </NavbarMenu>
+    </Navbar>
+  );
+}
