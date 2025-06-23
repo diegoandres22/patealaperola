@@ -1,0 +1,19 @@
+[
+    {
+        "id": 3,
+        "title": "Toyota Corolla",
+        "imageUrl": "https://cdn3.riastatic.com/photosnew/auto/photo/toyota_corolla__569815708f.jpg",
+        "ticketPrice": 1,
+        "minPurchase": 2,
+        "raffleStatus":1
+    },
+    {
+        "id": 4,
+        "title": "BMW GS ",
+        "imageUrl": "https://img.olx.com.br/images/53/538495577085359.jpg",
+        "ticketPrice": 1,
+        "minPurchase": 3,
+        "raffleStatus":2
+
+    }
+]

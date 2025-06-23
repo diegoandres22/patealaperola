@@ -8,5 +8,3 @@ export * from "./footerSection/footerSection";
 export * from "./carrouselCardRaffles/carrouselCardRaffles";
 
 
-//sorteos anteriores
-export * from "./carrouselPreviousRaffles/carrouselPreviousRaffles";
