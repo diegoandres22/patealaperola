@@ -29,8 +29,7 @@ export const CardRaffles: React.FC<CardRafflesProps> = ({ title, imageUrl, ticke
             <Card isFooterBlurred className="w-[300px] h-[300px] col-span-12 sm:col-span-5 hover:scale-110 transition-transform 
         duration-300 ease-in-out ">
                 <CardHeader className="absolute z-10 top-1 flex-col items-start">
-                    <p className="text-lg text-white/80 uppercase font-extrabold ">Patea la perola y gana</p>
-                    <h4 className="text-red-500 font-OFF font-black text-2xl ">{title}</h4>
+                    <p className="bg-black/70 px-2 text-lg text-white uppercase font-extrabold rounded-md ">{title}</p>
                 </CardHeader>
                 <Image
                     removeWrapper
