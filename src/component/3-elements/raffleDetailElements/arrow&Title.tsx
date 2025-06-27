@@ -9,7 +9,7 @@ export const ArrowAndTitle = () => {
                 <IconArrowLeft stroke={3} className='text-white scale-150' />
             </Button>
 
-            <h3 className='text-3xl m-auto'>Forruner 2024 </h3>
+            <h3 className='text-4xl m-auto'>Nombre del sorteo </h3>
         </div>
     )
 }
