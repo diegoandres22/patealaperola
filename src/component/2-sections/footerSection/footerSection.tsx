@@ -8,17 +8,21 @@ export const FooterSection = () => {
 
 
       <div className="w-5/6 mx-auto flex justify-evenly items-center">
-        
-        <Button color="primary" className='font-bold w-auto min-w-28' variant="shadow" aria-label="Participar ya">
-          Participar ya
+
+        <Button color="primary" className='font-bold w-auto min-w-28' variant="shadow" aria-label="Participar ya" >
+          <Link href="/" className='text-white'>
+            Participar ya
+          </Link>
         </Button>
 
 
-        <Link isBlock color="foreground" className='text-white hidden md:flex' href="#">
+        <Link isBlock color="foreground" className='text-white hidden md:flex' href="/">
           Ganadores
         </Link>
-        <Button isIconOnly aria-label="Contactar" variant="light" className='md:hidden w-auto' >
+        <Button isIconOnly aria-label="Ganadores" variant="light" className='md:hidden w-auto' >
+          <Link href="/">
           <IconAward className='text-white' stroke={2} />
+        </Link>
         </Button>
 
 
@@ -37,10 +41,6 @@ export const FooterSection = () => {
           <IconMessage className='text-white ' stroke={2} />
         </Button>
 
-
-        <Link isBlock color="foreground" className='text-white hidden md:flex whitespace-nowrap' href="#">
-          Preguntas frecuentes
-        </Link>
         <Button isIconOnly aria-label="Contactar" variant="light" className='flex md:hidden'>
           <IconZoomQuestion className='text-white ' stroke={2} />
         </Button>
