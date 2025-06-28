@@ -11,8 +11,8 @@ import {
   Button,
   Tooltip,
 } from "@heroui/react";
-import { Image } from "@heroui/image";
 import { IconAward, IconId, IconMessage } from '@tabler/icons-react';
+import { LogoImage } from '@/component/3-elements';
 
 
 export const NaavbarSection = () => {
@@ -22,27 +22,13 @@ export const NaavbarSection = () => {
 
       <NavbarContent className="flex sm:hidden " justify="start">
         <NavbarBrand>
-          <Link href="/" >
-            <Image
-              src="./isologo.png"
-              width={120}
-              height={80}
-              alt="Marca del sitio"
-            />
-          </Link>
+          <LogoImage />
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex " justify="start">
         <NavbarBrand >
-          <Link href="/" >
-            <Image
-              src="./isologo.png"
-              width={120}
-              height={80}
-              alt="Marca del sitio"
-            />
-          </Link>
+          <LogoImage />
         </NavbarBrand>
       </NavbarContent>
 
