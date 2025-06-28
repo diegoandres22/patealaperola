@@ -9,7 +9,7 @@ import { FormData } from '@/types';
 
 
 export const PurchaseForm: React.FC = () => {
-    const [submitted, setSubmitted] = useState(false);
+    // const [submitted, setSubmitted] = useState(false);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [formData, setFormData] = useState<FormData>({
         fullName: "",
@@ -23,24 +23,24 @@ export const PurchaseForm: React.FC = () => {
         transactionNumber: "",
     });
 
-    const validateForm = (data: FormData) => {
-        const newErrors: { [key: string]: string } = {};
+    // const validateForm = (data: FormData) => {
+    //     const newErrors: { [key: string]: string } = {};
 
-        // Validar los campos obligatorios
-        if (!data.fullName) newErrors.fullName = "Por favor ingresa un nombre válido";
-        if (!data.email) newErrors.email = "Por favor ingresa un email";
-        if (data.email !== data.emailVerify)
-            newErrors.emailVerify = "Los emails no coinciden";
-        if (!data.numberPhone) newErrors.numberPhone = "Por favor ingresa un número de teléfono válido";
-        if (!data.titularyCta) newErrors.titularyCta = "Por favor ingresa el titular de la cuenta";
-        if (!data.quantity || data.quantity <= 0)
-            newErrors.quantity = "Por favor ingresa un número de tickets válido";
-        if (!data.paymentMethod) newErrors.paymentMethod = "Por favor selecciona un método de pago";
-        if (!data.transactionNumber) newErrors.transactionNumber = "Por favor ingresa un número de operación o referencia";
-        if (!data.receipt) newErrors.receipt = "Por favor carga un comprobante";
+    //     // Validar los campos obligatorios
+    //     if (!data.fullName) newErrors.fullName = "Por favor ingresa un nombre válido";
+    //     if (!data.email) newErrors.email = "Por favor ingresa un email";
+    //     if (data.email !== data.emailVerify)
+    //         newErrors.emailVerify = "Los emails no coinciden";
+    //     if (!data.numberPhone) newErrors.numberPhone = "Por favor ingresa un número de teléfono válido";
+    //     if (!data.titularyCta) newErrors.titularyCta = "Por favor ingresa el titular de la cuenta";
+    //     if (!data.quantity || data.quantity <= 0)
+    //         newErrors.quantity = "Por favor ingresa un número de tickets válido";
+    //     if (!data.paymentMethod) newErrors.paymentMethod = "Por favor selecciona un método de pago";
+    //     if (!data.transactionNumber) newErrors.transactionNumber = "Por favor ingresa un número de operación o referencia";
+    //     if (!data.receipt) newErrors.receipt = "Por favor carga un comprobante";
 
-        return newErrors;
-    };
+    //     return newErrors;
+    // };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
@@ -96,12 +96,11 @@ export const PurchaseForm: React.FC = () => {
             transactionNumber: "",
         })
         setErrors({});
-        setSubmitted(true);
 
     };
 
     return (
-        <div className="w-full flex flex-col px-10 2xl:px-[10%]">
+        <div className="w-full flex flex-col px-10 2xl:px-[10%] ">
             <h4 className="text-3xl sm:mx-6">Comprar Tickets</h4>
 
             <Form
@@ -224,12 +223,6 @@ export const PurchaseForm: React.FC = () => {
                     </Button>
                 </div>
             </Form>
-
-            {submitted && (
-                <div className="mt-5 text-center text-green-500">
-                    <p>Formulario enviado correctamente.</p>
-                </div>
-            )}
         </div>
     );
 };
