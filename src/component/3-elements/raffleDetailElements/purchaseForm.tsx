@@ -1,25 +1,296 @@
-// "use client"
-// import React from 'react'
-// import { Button, Form, Input } from '@heroui/react';
-// import { addToast } from "@heroui/toast";
-// import { IconTicket } from '@tabler/icons-react';
+"use client";
 
-// export const PurchaseForm = () => {
+import React, { useState } from "react";
+import { Button, Form, Input, NumberInput, Select, SelectItem } from "@heroui/react";
+import { addToast } from "@heroui/toast";
+import { IconCreditCardPay, IconTicket } from "@tabler/icons-react";
+import { FormData } from '@/types';
+
+
+
+export const PurchaseForm: React.FC = () => {
+    const [submitted, setSubmitted] = useState(false);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [formData, setFormData] = useState<FormData>({
+        fullName: "",
+        email: "",
+        emailVerify: "",
+        numberPhone: "",
+        titularyCta: "",
+        quantity: 2,
+        paymentMethod: "",
+        receipt: null,
+        transactionNumber: "",
+    });
+
+    const validateForm = (data: FormData) => {
+        const newErrors: { [key: string]: string } = {};
+
+        // Validar los campos obligatorios
+        if (!data.fullName) newErrors.fullName = "Por favor ingresa un nombre válido";
+        if (!data.email) newErrors.email = "Por favor ingresa un email";
+        if (data.email !== data.emailVerify)
+            newErrors.emailVerify = "Los emails no coinciden";
+        if (!data.numberPhone) newErrors.numberPhone = "Por favor ingresa un número de teléfono válido";
+        if (!data.titularyCta) newErrors.titularyCta = "Por favor ingresa el titular de la cuenta";
+        if (!data.quantity || data.quantity <= 0)
+            newErrors.quantity = "Por favor ingresa un número de tickets válido";
+        if (!data.paymentMethod) newErrors.paymentMethod = "Por favor selecciona un método de pago";
+        if (!data.transactionNumber) newErrors.transactionNumber = "Por favor ingresa un número de operación o referencia";
+        if (!data.receipt) newErrors.receipt = "Por favor carga un comprobante";
+
+        return newErrors;
+    };
+
+    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value, type } = e.target;
+
+        // Verificamos si el input es de tipo "file"
+        if (type === "file" && e.target instanceof HTMLInputElement) {
+            const files = e.target.files ? e.target.files[0] : null;
+            setFormData((prevState) => ({
+                ...prevState,
+                [name]: files,
+            }));
+        } else {
+            setFormData((prevState) => ({
+                ...prevState,
+                [name]: value,
+            }));
+        }
+    };
+
+    const onQuantityChange = (value: number) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            quantity: value,
+        }));
+    };
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        addToast({
+            title: "Compra realizada con éxito",
+            description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
+            color: "success",
+            timeout: 10000,
+            shouldShowTimeoutProgress: true,
+        });
+        // const validationErrors = validateForm(formData);
+
+        // if (Object.keys(validationErrors).length > 0) {
+        //     setErrors(validationErrors);
+        //     return;
+        // }
+
+        setFormData({
+            fullName: "",
+            email: "",
+            emailVerify: "",
+            numberPhone: "",
+            titularyCta: "",
+            quantity: 2,
+            paymentMethod: "",
+            receipt: null,
+            transactionNumber: "",
+        })
+        setErrors({});
+        setSubmitted(true);
+
+    };
+
+    return (
+        <div className="w-full flex flex-col px-10 2xl:px-[10%]">
+            <h4 className="text-3xl sm:mx-6">Comprar Tickets</h4>
+
+            <Form
+                className="w-full max-w-md flex flex-col gap-5 sm:m-6 mt-4 bg-slate-400/10 p-5 rounded-xl"
+                onSubmit={onSubmit}
+            >
+                <Input
+                    isRequired
+                    errorMessage={errors.fullName}
+                    label="Nombre y apellido"
+                    labelPlacement="outside"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={onChange}
+                    placeholder="Nombre y apellido"
+                    type="text"
+                />
+                <Input
+                    isRequired
+                    errorMessage={errors.email}
+                    label="Email"
+                    labelPlacement="outside"
+                    name="email"
+                    value={formData.email}
+                    onChange={onChange}
+                    placeholder="Email"
+                    type="email"
+                />
+                <Input
+                    isRequired
+                    errorMessage={errors.emailVerify}
+                    label="Confirmar Email"
+                    labelPlacement="outside"
+                    name="emailVerify"
+                    value={formData.emailVerify}
+                    onChange={onChange}
+                    placeholder="Reingresar Email"
+                    type="email"
+                />
+                <Input
+                    isRequired
+                    errorMessage={errors.numberPhone}
+                    label="Número de teléfono"
+                    labelPlacement="outside"
+                    name="numberPhone"
+                    value={formData.numberPhone}
+                    onChange={onChange}
+                    placeholder="+58 412 1234567"
+                    type="text"
+                />
+                <Input
+                    isRequired
+                    errorMessage={errors.titularyCta}
+                    label="Titular de la cuenta desde donde se realiza el pago"
+                    labelPlacement="outside"
+                    name="titularyCta"
+                    value={formData.titularyCta}
+                    onChange={onChange}
+                    placeholder="Nombre del titular"
+                    type="text"
+                />
+                <NumberInput
+                    value={formData.quantity}
+                    minValue={2}
+                    maxValue={10000}
+                    label="Número de tickets a comprar"
+                    labelPlacement="inside"
+                    name="quantity"
+                    onValueChange={onQuantityChange}  // Cambié aquí para aceptar un número
+                    errorMessage={errors.quantity}
+                />
+                <Select
+                    label="Método de pago"
+                    placeholder="Seleccionar"
+                    startContent={<IconCreditCardPay stroke={2} />}
+                    name="paymentMethod"
+                    value={formData.paymentMethod}
+                    onChange={onChange}
+                    errorMessage={errors.paymentMethod}
+                >
+                    <SelectItem key={0}>Banesco</SelectItem>
+                    <SelectItem key={5}>Mercantil</SelectItem>
+                    <SelectItem key={2}>Zelle</SelectItem>
+                    <SelectItem key={3}>Santander Rio</SelectItem>
+                    <SelectItem key={4}>Binance</SelectItem>
+                    <SelectItem key={6}>Banesco Panama</SelectItem>
+                    <SelectItem key={7}>Bank of America</SelectItem>
+                </Select>
+
+                <Input
+                    isRequired
+                    label="Cargar comprobante"
+                    type="file"
+                    name="receipt"
+                    onChange={onChange}
+                    errorMessage={errors.receipt}
+                />
+
+                <Input
+                    isRequired
+                    errorMessage={errors.transactionNumber}
+                    label="Número de operación o referencia"
+                    labelPlacement="outside"
+                    name="transactionNumber"
+                    value={formData.transactionNumber}
+                    onChange={onChange}
+                    placeholder="Pegar número referencia"
+                    type="text"
+                />
+
+                <div className="flex gap-2 m-auto">
+                    <Button
+                        color="primary"
+                        variant="shadow"
+                        className="font-semibold text-lg px-10"
+                        endContent={<IconTicket stroke={2} />}
+                        type="submit"
+                    >
+                        Comprar rifa
+                    </Button>
+                </div>
+            </Form>
+
+            {submitted && (
+                <div className="mt-5 text-center text-green-500">
+                    <p>Formulario enviado correctamente.</p>
+                </div>
+            )}
+        </div>
+    );
+};
+
+// "use client";
+// import { addToast } from "@heroui/toast";
+// import React, { useState } from 'react';
+// import { Button, Form, Input, NumberInput, Select, SelectItem } from '@heroui/react';
+// import { IconCreditCardPay, IconTicket } from '@tabler/icons-react';
+
+// interface FormData {
+//     fullName: string;
+//     email: string;
+//     emailVerify: string;
+//     numberPhone: string;
+//     titularyCta: string;
+//     quantity: number;
+//     paymentMethod: string;
+//     receipt: File | null;
+//     transactionNumber: string;
+// }
+
+// export const PurchaseForm: React.FC = () => {
+//     const [submitted, setSubmitted] = useState<FormData | null>(null);
+
+//     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+//         e.preventDefault();
+
+//         const data = new FormData(e.currentTarget);
+
+//         // Extraer los valores del formulario
+//         const formValues: FormData = {
+//             fullName: data.get("fullName") as string,
+//             email: data.get("email") as string,
+//             emailVerify: data.get("emailVerify") as string,
+//             numberPhone: data.get("numberPhone") as string,
+//             titularyCta: data.get("titularyCta") as string,
+//             quantity: Number(data.get("quantity")),
+//             paymentMethod: data.get("paymentMethod") as string,
+//             receipt: data.get("receipt") as File,
+//             transactionNumber: data.get("transactionNumber") as string,
+//         };
+
+//         addToast({
+//             title: "Compra realizada con éxito",
+//             description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
+//             color: "success",
+//             timeout: 10000,
+//             shouldShowTimeoutProgress: true,
+//         });
+
+//         setSubmitted(formValues);
+//     };
 
 //     return (
-//         <div className=' w-full flex flex-col px-10 2xl:px-[10%]'>
+//         <div className='w-full flex flex-col px-10 2xl:px-[10%]'>
 //             <h4 className='text-3xl sm:mx-6'>Comprar Tickets</h4>
 
 //             <Form
 //                 className="w-full max-w-md flex flex-col gap-5 sm:m-6 mt-4 bg-slate-400/10 p-5 rounded-xl"
-//                 onSubmit={() => {
-//                     () =>
-//                         addToast({
-//                             title: "Compra realizada con éxito",
-//                             description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
-//                             color: "success",
-//                         })
-//                 }}
+//                 onSubmit={onSubmit}
 //             >
 //                 <Input
 //                     isRequired
@@ -56,136 +327,65 @@
 //                     name="numberPhone"
 //                     placeholder="+58 412 1234567 "
 //                     type="text"
-
 //                 />
 //                 <Input
 //                     isRequired
 //                     errorMessage="Please enter a valid email"
 //                     label="Titular de la cuenta desde donde se realiza el pago"
 //                     labelPlacement="outside"
-//                     name="titulariCta"
+//                     name="titularyCta"
 //                     placeholder="Nombre del titular"
-//                     type="email"
+//                     type="text"
 //                     className='pt-2 sm:pt-0'
+//                 />
+//                 <NumberInput
+
+//                     defaultValue={2}
+//                     minValue={2}
+//                     maxValue={10000}
+//                     label="Numeros a comprar"
+//                     labelPlacement='inside'
+
+//                 />
+//                 <Select
+//                     isRequired
+//                     label="Metodo de pago"
+//                     placeholder="Seleccionar"
+//                     startContent={<IconCreditCardPay stroke={2} />}
+//                 >
+//                     <SelectItem key={0}>Banesco</SelectItem>
+//                     <SelectItem key={5}>Mercantil</SelectItem>
+//                     <SelectItem key={2}>Zelle</SelectItem>
+//                     <SelectItem key={3}>Santander Rio</SelectItem>
+//                     <SelectItem key={4}>Binance</SelectItem>
+//                     <SelectItem key={6}>Banesco panama</SelectItem>
+//                     <SelectItem key={7}>Bank of americ</SelectItem>
+//                 </Select>
+
+//                 <Input isRequired label="Cargar comprobante" type="file" />
+
+//                 <Input
+//                     isRequired
+//                     errorMessage="Por favor ingresa de número de operación o referencia"
+//                     label="Número de operación o referencia"
+//                     labelPlacement="outside"
+//                     name="NumOp"
+//                     placeholder="Pegar número referencia"
+//                     type="text"
 //                 />
 
 //                 <div className="flex gap-2 m-auto">
-//                     <Button color="primary" variant='shadow' className='font-semibold text-lg px-10' endContent={<IconTicket stroke={2} />}
-//                         onClick={() => {
-//                             addToast({
-//                                 title: "Compra realizada con éxito",
-//                                 description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
-//                                 color: "success",
-//                                 timeout: 10000,
-//                                 shouldShowTimeoutProgress: true,
-//                             })
-//                         }}>
+//                     <Button
+//                         color="primary"
+//                         variant='shadow'
+//                         className='font-semibold text-lg px-10'
+//                         endContent={<IconTicket stroke={2} />}
+//                     >
 //                         Comprar rifa
 //                     </Button>
-
 //                 </div>
 
 //             </Form>
-
-
 //         </div>
 //     );
 // };
-
-"use client";
-import React from 'react';
-import { Button, Form, Input } from '@heroui/react';
-import { addToast } from "@heroui/toast";
-import { IconTicket } from '@tabler/icons-react';
-
-export const PurchaseForm = () => {
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault(); 
-
-        addToast({
-            title: "Compra realizada con éxito",
-            description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
-            color: "success",
-        });
-    };
-
-    return (
-        <div className='w-full flex flex-col px-10 2xl:px-[10%]'>
-            <h4 className='text-3xl sm:mx-6'>Comprar Tickets</h4>
-
-            <Form
-                className="w-full max-w-md flex flex-col gap-5 sm:m-6 mt-4 bg-slate-400/10 p-5 rounded-xl"
-                onSubmit={handleSubmit} // Aquí llamamos a handleSubmit
-            >
-                <Input
-                    isRequired
-                    errorMessage="Por favor ingresa un nombre valido"
-                    label=" Nombre y apellido "
-                    labelPlacement="outside"
-                    name="fullName"
-                    placeholder="Nombre y apellido"
-                    type="text"
-                />
-                <Input
-                    isRequired
-                    errorMessage="Por favor ingresa un email"
-                    label=" Email "
-                    labelPlacement="outside"
-                    name="email"
-                    placeholder="Email"
-                    type="email"
-                />
-                <Input
-                    isRequired
-                    errorMessage="Por favor ingresa de nuevo el email"
-                    label="Confirmar Email "
-                    labelPlacement="outside"
-                    name="emailVerify"
-                    placeholder="Reingresar Email"
-                    type="email"
-                />
-                <Input
-                    isRequired
-                    errorMessage="Por favor ingresa un número de teléfono válido"
-                    label="Número de teléfono "
-                    labelPlacement="outside"
-                    name="numberPhone"
-                    placeholder="+58 412 1234567 "
-                    type="text"
-                />
-                <Input
-                    isRequired
-                    errorMessage="Please enter a valid email"
-                    label="Titular de la cuenta desde donde se realiza el pago"
-                    labelPlacement="outside"
-                    name="titularyCta" 
-                    placeholder="Nombre del titular"
-                    type="email"
-                    className='pt-2 sm:pt-0'
-                />
-
-                <div className="flex gap-2 m-auto">
-                    <Button
-                        color="primary"
-                        variant='shadow'
-                        className='font-semibold text-lg px-10'
-                        endContent={<IconTicket stroke={2} />}
-                        onClick={() => {
-                            addToast({
-                                title: "Compra realizada con éxito",
-                                description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
-                                color: "success",
-                                timeout: 10000,
-                                shouldShowTimeoutProgress: true,
-                            });
-                        }}
-                    >
-                        Comprar rifa
-                    </Button>
-                </div>
-
-            </Form>
-        </div>
-    );
-};
