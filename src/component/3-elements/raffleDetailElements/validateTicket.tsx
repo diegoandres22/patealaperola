@@ -5,7 +5,7 @@ export const ValidateTicket = () => {
     const [action, setAction] = useState<string | null>(null);
 
     return (
-        <div className="w-full max-w-md flex sm:mx-6 xl:mx-0 mb-6 bg-slate-400/10 p-5 rounded-xl flex-col max-h-52 xl:max-w-80">
+        <div className="w-full max-w-md flex sm:mx-6 xl:mx-0 mb-6 bg-slate-400/10 p-5 rounded-xl flex-col max-h-72 xl:max-w-80">
             <h4 className="text-2xl mb-3">Validar Tickets comprados</h4>
 
             <Form
