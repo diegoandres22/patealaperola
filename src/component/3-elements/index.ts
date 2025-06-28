@@ -1,5 +1,4 @@
 //Carta de rifas
-
 export * from "./cardRaffles/cardRaffles";
 
 
@@ -9,3 +8,5 @@ export * from "./raffleDetailElements/imageRaffle"
 export * from "./raffleDetailElements/raffleData"
 export * from "./raffleDetailElements/purchaseForm"
 
+//Logo navbar
+export * from "./logoImage";

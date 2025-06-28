@@ -11,52 +11,42 @@ import {
   Button,
   Tooltip,
 } from "@heroui/react";
-import { Image } from "@heroui/image";
-import { IconAward, IconId, IconMessage, IconZoomQuestion } from '@tabler/icons-react';
+import { IconAward, IconId, IconMessage } from '@tabler/icons-react';
+import { LogoImage } from '@/component/3-elements';
 
 
 export const NaavbarSection = () => {
 
   return (
-    <Navbar className='bg-black bg-transparent' isBlurred>
+    <Navbar className='bg-black bg-transparent py-4' isBlurred>
 
-      <NavbarContent className="sm:hidden max-w-14 " justify="start">
+      <NavbarContent className="flex sm:hidden " justify="start">
         <NavbarBrand>
-
-          <Image
-            src="./isologo.png"
-            width={100}
-            height={40}
-            alt="Marca del sitio"
-            className='cursor-pointer'
-          />
+          <LogoImage />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex" justify="start">
-        <NavbarBrand>
-          <Image
-            src="./isologo.png"
-            width={120}
-            height={70}
-            alt="Marca del sitio"
-            className='cursor-pointer'
-
-          />
+      <NavbarContent className="hidden sm:flex " justify="start">
+        <NavbarBrand >
+          <LogoImage />
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent justify="end" className='hidden sm:flex'>
         <NavbarItem >
-          <Button color="primary" className='font-bold' variant="shadow" aria-label="Participar ya">
-            Participar ya
+          <Button color="primary" className='font-bold w-auto min-w-28' variant="shadow" aria-label="Participar ya" >
+            <Link href="/" className='text-white'>
+              Participar ya
+            </Link>
           </Button>
         </NavbarItem>
 
         <NavbarItem>
           <Tooltip content="Ganadores" showArrow={true} >
-            <Button isIconOnly aria-label="Contactar" variant="light" >
-              <IconAward stroke={2} />
+            <Button isIconOnly aria-label="Ganadores" variant="light" >
+              <Link href="/" className='text-white'>
+                <IconAward stroke={2} />
+              </Link>
             </Button>
           </Tooltip>
         </NavbarItem>
@@ -64,7 +54,7 @@ export const NaavbarSection = () => {
         <NavbarItem >
           <Tooltip content="Quienes somos y Permisos" showArrow={true} >
             <Button isIconOnly aria-label="Quienes somos y Permisos" variant="light" >
-              <IconId stroke={2}  />
+              <IconId stroke={2} />
             </Button>
           </Tooltip>
         </NavbarItem>
@@ -72,15 +62,7 @@ export const NaavbarSection = () => {
         <NavbarItem>
           <Tooltip content="Contactar" showArrow={true} >
             <Button isIconOnly aria-label="Contactar" variant="light" >
-              <IconMessage  stroke={2} />
-            </Button>
-          </Tooltip>
-        </NavbarItem>
-
-        <NavbarItem>
-          <Tooltip content="Preguntas frecuentes" showArrow={true}  placement='bottom-end'>
-            <Button isIconOnly aria-label="Preguntas frecuentes" variant="light" >
-              <IconZoomQuestion  stroke={2} />
+              <IconMessage stroke={2} />
             </Button>
           </Tooltip>
         </NavbarItem>
@@ -94,13 +76,13 @@ export const NaavbarSection = () => {
       <NavbarMenu className=' justify-center bg-transparent gap-4'>
 
         <NavbarMenuItem key={0}>
-          <Link className=" cursor-pointer text-white" size="lg"  >
+          <Link className=" cursor-pointer text-white" size="lg" href="/" >
             PARTICIPAR YA
           </Link>
         </NavbarMenuItem>
 
         <NavbarMenuItem key={1}>
-          <Link className=" cursor-pointer text-white" size="lg"  >
+          <Link className=" cursor-pointer text-white" size="lg" href="/" >
             Ganadores
           </Link>
         </NavbarMenuItem>
@@ -114,12 +96,6 @@ export const NaavbarSection = () => {
         <NavbarMenuItem key={3}>
           <Link className=" cursor-pointer text-white" size="lg"  >
             Contactar
-          </Link>
-        </NavbarMenuItem>
-
-        <NavbarMenuItem key={3}>
-          <Link className=" cursor-pointer text-white" size="lg"  >
-            Preguntas frecuentes
           </Link>
         </NavbarMenuItem>
 
