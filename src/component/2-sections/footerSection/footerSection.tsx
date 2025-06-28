@@ -14,7 +14,7 @@ export const FooterSection = () => {
         </Button>
 
 
-        <Link isBlock color="primary" className='text-white hidden md:flex' href="#">
+        <Link isBlock color="foreground" className='text-white hidden md:flex' href="#">
           Ganadores
         </Link>
         <Button isIconOnly aria-label="Contactar" variant="light" className='md:hidden w-auto' >
@@ -22,7 +22,7 @@ export const FooterSection = () => {
         </Button>
 
 
-        <Link isBlock color="primary" className='text-white hidden md:flex whitespace-nowrap' href="#">
+        <Link isBlock color="foreground" className='text-white hidden md:flex whitespace-nowrap' href="#">
           Quienes somos y permisos
         </Link>
         <Button isIconOnly aria-label="Quienes somos y Permisos" variant="light" className='flex md:hidden' >
@@ -30,7 +30,7 @@ export const FooterSection = () => {
         </Button>
 
 
-        <Link isBlock color="primary" className='text-white hidden md:flex' href="#">
+        <Link isBlock color="foreground" className='text-white hidden md:flex' href="#">
           Contactar
         </Link>
         <Button isIconOnly aria-label="Contactar" variant="light" className='flex md:hidden'>
@@ -38,7 +38,7 @@ export const FooterSection = () => {
         </Button>
 
 
-        <Link isBlock color="primary" className='text-white hidden md:flex whitespace-nowrap' href="#">
+        <Link isBlock color="foreground" className='text-white hidden md:flex whitespace-nowrap' href="#">
           Preguntas frecuentes
         </Link>
         <Button isIconOnly aria-label="Contactar" variant="light" className='flex md:hidden'>

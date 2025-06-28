@@ -2,7 +2,7 @@ import React from 'react'
 
 export const RaffleData = () => {
     return (
-        <div className=' w-full flex flex-col p-5 2xl:px-[10%] gap-2'>
+        <div className=' w-full flex flex-col sm:mx-6 px-10 2xl:px-[10%] gap-2'>
             <p>
                 ¡ Participa en esta Gran Rifa de Patea la perola y gana !
             </p>

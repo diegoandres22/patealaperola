@@ -7,3 +7,5 @@ export * from "./cardRaffles/cardRaffles";
 export * from "./raffleDetailElements/arrow&Title"
 export * from "./raffleDetailElements/imageRaffle"
 export * from "./raffleDetailElements/raffleData"
+export * from "./raffleDetailElements/purchaseForm"
+
