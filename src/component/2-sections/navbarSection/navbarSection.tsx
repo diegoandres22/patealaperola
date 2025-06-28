@@ -46,8 +46,6 @@ export const NaavbarSection = () => {
         </NavbarBrand>
       </NavbarContent>
 
-
-
       <NavbarContent justify="end" className='hidden sm:flex'>
         <NavbarItem >
           <Button color="primary" className='font-bold' variant="shadow" aria-label="Participar ya">
@@ -56,33 +54,33 @@ export const NaavbarSection = () => {
         </NavbarItem>
 
         <NavbarItem>
-          <Tooltip content="Ganadores" showArrow={true} className='text-black'>
+          <Tooltip content="Ganadores" showArrow={true} >
             <Button isIconOnly aria-label="Contactar" variant="light" >
-              <IconAward className='text-white' stroke={2} />
+              <IconAward stroke={2} />
             </Button>
           </Tooltip>
         </NavbarItem>
 
         <NavbarItem >
-          <Tooltip content="Quienes somos y Permisos" showArrow={true} className='text-black'>
+          <Tooltip content="Quienes somos y Permisos" showArrow={true} >
             <Button isIconOnly aria-label="Quienes somos y Permisos" variant="light" >
-              <IconId stroke={2} className='text-white' />
+              <IconId stroke={2}  />
             </Button>
           </Tooltip>
         </NavbarItem>
 
         <NavbarItem>
-          <Tooltip content="Contactar" showArrow={true} className='text-black'>
+          <Tooltip content="Contactar" showArrow={true} >
             <Button isIconOnly aria-label="Contactar" variant="light" >
-              <IconMessage className='text-white' stroke={2} />
+              <IconMessage  stroke={2} />
             </Button>
           </Tooltip>
         </NavbarItem>
 
         <NavbarItem>
-          <Tooltip content="Preguntas frecuentes" showArrow={true} className='text-black' placement='bottom-end'>
+          <Tooltip content="Preguntas frecuentes" showArrow={true}  placement='bottom-end'>
             <Button isIconOnly aria-label="Preguntas frecuentes" variant="light" >
-              <IconZoomQuestion className='text-white ' stroke={2} />
+              <IconZoomQuestion  stroke={2} />
             </Button>
           </Tooltip>
         </NavbarItem>

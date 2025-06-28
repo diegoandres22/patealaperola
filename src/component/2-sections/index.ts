@@ -5,6 +5,10 @@ export * from "./navbarSection/navbarSection";
 export * from "./footerSection/footerSection";
 
 //sorteos activod
-export * from "./carrouselCardRaffles/carrouselCardRaffles";
+export * from "./carrouselCardRafflesSection/carrouselCardRaffles";
+
+
+//Detalle de la rifa
+export * from "./carrouselCardRafflesSection/carrouselCardRaffles";
 
 

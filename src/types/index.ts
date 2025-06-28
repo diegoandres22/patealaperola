@@ -6,3 +6,4 @@ export * from "./sections/carrouselCardRaffles"
 
 //Tipos para elementos
 export * from "./elements/cardRaffles"
+export * from "./elements/purchaseForm"

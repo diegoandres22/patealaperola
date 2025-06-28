@@ -3,6 +3,7 @@
 import * as React from "react";
 
 import { HeroUIProvider } from "@heroui/react";
+import {ToastProvider} from "@heroui/toast";
 import { FooterSection, NaavbarSection } from "@/component/2-sections";
 
 export function Provider({ children }: Readonly<{
@@ -11,6 +12,7 @@ export function Provider({ children }: Readonly<{
     return (
         <HeroUIProvider>
             <NaavbarSection />
+            <ToastProvider placement="bottom-center"/>
             {children}
             <FooterSection />
         </HeroUIProvider>
