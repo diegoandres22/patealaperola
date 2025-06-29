@@ -3,8 +3,11 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button
 import { IconCopy } from '@tabler/icons-react'
 
 export const PurchaseDataTable = () => {
+
     return (
-        <Table aria-label="Datos de cuenta para pagar">
+        <Table aria-label="Datos de cuenta para pagar"
+            color="default"
+            selectionMode="single">
             <TableHeader>
                 <TableColumn>Tipo</TableColumn>
                 <TableColumn>Datos</TableColumn>
@@ -40,7 +43,7 @@ export const PurchaseDataTable = () => {
                 </TableRow>
                 <TableRow key="4">
                     <TableCell>Total</TableCell>
-                    <TableCell>260</TableCell>
+                    <TableCell>389,21</TableCell>
                     <TableCell>
                         <Button isIconOnly aria-label="Copiar" variant="light">
                             <IconCopy stroke={1} />
