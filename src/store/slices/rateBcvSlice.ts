@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { fetchRateBcvData } from "../services/rateBcvService";
 
 interface ScrollState {
 
@@ -14,15 +15,15 @@ interface ScrollState {
 
 }
 const initialState: ScrollState = {
-    change: 0.76,
-    color: "green",
-    image: "https://res.cloudinary.com/dcpyfqx87/image/upload/v1729921477/monitors/public_id:united-states.webp",
-    last_update: "30/06/2025, 12:00 AM",
-    percent: 0.71,
-    price: 107.62,
-    price_old: 106.86,
-    symbol: "$",
-    title: "Dolar estadounidense"
+    change: 0,
+    color: "",
+    image: "",
+    last_update: "",
+    percent: 0,
+    price: 0,
+    price_old: 0,
+    symbol: "",
+    title: ""
 };
 const rateBcvSlice = createSlice({
     name: "rateBcv",
@@ -32,6 +33,14 @@ const rateBcvSlice = createSlice({
             state = action.payload;
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(fetchRateBcvData.fulfilled, (state, action) => {
+            return { ...state, ...action.payload };
+        });
+        builder.addCase(fetchRateBcvData.rejected, (state, action) => {
+            console.error("Error al obtener los datos:", action.payload);
+        });
+    },
 });
-export const { setRateBcv, } = rateBcvSlice.actions;
+export const { setRateBcv } = rateBcvSlice.actions;
 export default rateBcvSlice.reducer;
