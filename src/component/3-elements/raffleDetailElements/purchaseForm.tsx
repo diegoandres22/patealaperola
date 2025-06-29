@@ -5,6 +5,7 @@ import { Button, Form, Input, NumberInput, Select, SelectItem } from "@heroui/re
 import { addToast } from "@heroui/toast";
 import { IconCreditCardPay, IconTicket } from "@tabler/icons-react";
 import { FormData } from '@/types';
+import { PurchaseDataTable } from "./purchaseDataTable";
 
 
 
@@ -100,11 +101,11 @@ export const PurchaseForm: React.FC = () => {
     };
 
     return (
-        <div className="w-full flex flex-col px-10 2xl:px-[10%] ">
+        <div className="w-full flex flex-col px-10 2xl:px-[10%] items-center">
             <h4 className="text-3xl sm:mx-6">Comprar Tickets</h4>
 
             <Form
-                className="w-full max-w-md flex flex-col gap-5 sm:m-6 mt-4 bg-slate-400/10 p-5 rounded-xl"
+                className="w-full max-w-lg flex flex-col gap-5 sm:m-6 mt-4 bg-slate-400/10 p-5 rounded-xl"
                 onSubmit={onSubmit}
             >
                 <Input
@@ -169,7 +170,7 @@ export const PurchaseForm: React.FC = () => {
                     label="Número de tickets a comprar"
                     labelPlacement="inside"
                     name="quantity"
-                    onValueChange={onQuantityChange}  // Cambié aquí para aceptar un número
+                    onValueChange={onQuantityChange}
                     errorMessage={errors.quantity}
                 />
                 <Select
@@ -189,6 +190,8 @@ export const PurchaseForm: React.FC = () => {
                     <SelectItem key={6}>Banesco Panama</SelectItem>
                     <SelectItem key={7}>Bank of America</SelectItem>
                 </Select>
+
+                <PurchaseDataTable></PurchaseDataTable>
 
                 <Input
                     isRequired

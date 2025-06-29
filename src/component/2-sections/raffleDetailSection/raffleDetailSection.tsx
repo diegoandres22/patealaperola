@@ -18,7 +18,7 @@ export const RaffleDetailSection = () => {
             </div>
             <Divider className="my-1 bg-white/50 w-10/12 mx-auto" />
             <PurchaseForm />
-            <div className="px-10 2xl:px-[10%] xl:hidden">
+            <div className="px-10 2xl:px-[10%] xl:hidden flex justify-center">
                 <ValidateTicket />
             </div>
         </div>
