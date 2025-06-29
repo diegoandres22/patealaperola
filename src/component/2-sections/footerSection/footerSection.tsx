@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Link } from "@heroui/react";
-import { IconAward, IconBrandInstagram, IconBrandTiktok, IconBrandWhatsapp, IconId, IconMail, IconMessage, IconZoomQuestion } from '@tabler/icons-react';
+import { IconAward, IconBrandInstagram, IconBrandTiktok, IconBrandWhatsapp, IconId, IconMail, IconQuestionMark } from '@tabler/icons-react';
 
 export const FooterSection = () => {
   return (
@@ -15,14 +15,13 @@ export const FooterSection = () => {
           </Link>
         </Button>
 
-
-        <Link isBlock color="foreground" className='text-white hidden md:flex' href="/">
+        <Link isBlock color="foreground" className='text-white hidden md:flex' href="/#Winners">
           Ganadores
         </Link>
         <Button isIconOnly aria-label="Ganadores" variant="light" className='md:hidden w-auto' >
           <Link href="/">
-          <IconAward className='text-white' stroke={2} />
-        </Link>
+            <IconAward className='text-white' stroke={2} />
+          </Link>
         </Button>
 
 
@@ -34,15 +33,13 @@ export const FooterSection = () => {
         </Button>
 
 
-        <Link isBlock color="foreground" className='text-white hidden md:flex' href="#">
-          Contactar
+        <Link isBlock color="foreground" className='text-white hidden md:flex' href="/faq">
+          Preguntas frecuentes
         </Link>
-        <Button isIconOnly aria-label="Contactar" variant="light" className='flex md:hidden'>
-          <IconMessage className='text-white ' stroke={2} />
-        </Button>
-
-        <Button isIconOnly aria-label="Contactar" variant="light" className='flex md:hidden'>
-          <IconZoomQuestion className='text-white ' stroke={2} />
+        <Button isIconOnly aria-label="Preguntas frecuentes" variant="light" className='flex md:hidden'>
+          <Link href="/faq" className='text-white'>
+            <IconQuestionMark stroke={2} />
+          </Link>
         </Button>
       </div>
 

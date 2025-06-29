@@ -11,7 +11,7 @@ import {
   Button,
   Tooltip,
 } from "@heroui/react";
-import { IconAward, IconId, IconMessage } from '@tabler/icons-react';
+import { IconAward, IconId, IconQuestionMark } from '@tabler/icons-react';
 import { LogoImage } from '@/component/3-elements';
 
 
@@ -44,7 +44,7 @@ export const NaavbarSection = () => {
         <NavbarItem>
           <Tooltip content="Ganadores" showArrow={true} >
             <Button isIconOnly aria-label="Ganadores" variant="light" >
-              <Link href="/" className='text-white'>
+              <Link href="/#Winners" className='text-white'>
                 <IconAward stroke={2} />
               </Link>
             </Button>
@@ -60,9 +60,11 @@ export const NaavbarSection = () => {
         </NavbarItem>
 
         <NavbarItem>
-          <Tooltip content="Contactar" showArrow={true} >
-            <Button isIconOnly aria-label="Contactar" variant="light" >
-              <IconMessage stroke={2} />
+          <Tooltip content="Preguntas frecuentes" showArrow={true} >
+            <Button isIconOnly aria-label="Preguntas frecuentes" variant="light" >
+              <Link href="/faq" className='text-white'>
+                <IconQuestionMark stroke={2} />
+              </Link>
             </Button>
           </Tooltip>
         </NavbarItem>
@@ -76,26 +78,26 @@ export const NaavbarSection = () => {
       <NavbarMenu className=' justify-center bg-transparent gap-4'>
 
         <NavbarMenuItem key={0}>
-          <Link className=" cursor-pointer text-white" size="lg" href="/" >
+          <Link className=" text-white" size="lg" href="/" >
             PARTICIPAR YA
           </Link>
         </NavbarMenuItem>
 
         <NavbarMenuItem key={1}>
-          <Link className=" cursor-pointer text-white" size="lg" href="/" >
+          <Link className=" text-white" size="lg" href="/#Winners" >
             Ganadores
           </Link>
         </NavbarMenuItem>
 
         <NavbarMenuItem key={2}>
-          <Link className=" cursor-pointer text-white" size="lg"  >
+          <Link className=" text-white" size="lg"  >
             Quienes somos y permisos
           </Link>
         </NavbarMenuItem>
 
         <NavbarMenuItem key={3}>
-          <Link className=" cursor-pointer text-white" size="lg"  >
-            Contactar
+          <Link className=" text-white" size="lg" href='/faq' >
+            Preguntas frecuentes
           </Link>
         </NavbarMenuItem>
 

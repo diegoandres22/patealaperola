@@ -7,7 +7,7 @@ import { CarrouselCardRafflesProps } from '@/types'
 export const CarrouselCardRaffles: React.FC<CarrouselCardRafflesProps> = ({ rafflesData }) => {
     return (
 
-        <div className="flex md:w-full flex-col md:flex-row items-center md:items-start gap-10 flex-wrap">
+        <div className="flex md:w-full flex-col md:flex-row items-center md:items-start gap-10 flex-wrap" id='Winners'>
 
             {rafflesData.map((raffle, index) => (
                 <CardRaffles
