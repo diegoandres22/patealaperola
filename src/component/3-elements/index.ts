@@ -7,6 +7,7 @@ export * from "./raffleDetailElements/arrow&Title"
 export * from "./raffleDetailElements/imageRaffle"
 export * from "./raffleDetailElements/raffleData"
 export * from "./raffleDetailElements/purchaseForm"
+export * from "./raffleDetailElements/purchaseDataTable"
 
 //Logo navbar
 export * from "./logoImage";
