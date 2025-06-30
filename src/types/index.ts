@@ -4,5 +4,4 @@
 export * from "./sections/cardRafflesProps"
 
 //Tipos para elementos
-export * from "./elements/cardRaffles"
 export * from "./elements/purchaseForm"
