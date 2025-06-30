@@ -16,6 +16,8 @@ export const RateBcv = () => {
 
 
     const rateBcv = useSelector((state: RootState) => state.RateBcv.price)
+
+    
     return (
         <div className='w-full absolute flex justify-end '>
             <Tooltip content="Tasa Banco Central de Venezuela" showArrow={true} >

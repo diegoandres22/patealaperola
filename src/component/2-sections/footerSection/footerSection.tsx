@@ -19,7 +19,7 @@ export const FooterSection = () => {
           Ganadores
         </Link>
         <Button isIconOnly aria-label="Ganadores" variant="light" className='md:hidden w-auto' >
-          <Link href="/">
+          <Link href="#Winners">
             <IconAward className='text-white' stroke={2} />
           </Link>
         </Button>
@@ -44,16 +44,16 @@ export const FooterSection = () => {
       </div>
 
       <div className="w-2/4 mx-auto flex justify-evenly ">
-        <Link className='text-white' href="#">
+        <Link className='text-white' href="https://www.tiktok.com/" target='_blank'>
           <IconBrandTiktok stroke={2} />
         </Link>
-        <Link className='text-white' href="#">
+        <Link className='text-white' href="https://www.instagram.com/" target='_blank'>
           <IconBrandInstagram stroke={2} />
         </Link>
-        <Link className='text-white' href="#">
+        <Link className='text-white' href="https://wa.me/584124998202" target='_blank'>
           <IconBrandWhatsapp stroke={2} />
         </Link>
-        <Link className='text-white' href="#">
+        <Link className='text-white' href="mailto:patealaperola@gmail.com?body=necesito%20ayuda">
           <IconMail stroke={2} />
         </Link>
 
