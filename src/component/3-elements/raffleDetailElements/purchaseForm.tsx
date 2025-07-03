@@ -1,16 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Form, Input, NumberInput, Select, SelectItem } from "@heroui/react";
+import { Button, Form, Input, NumberInput } from "@heroui/react";
 import { addToast } from "@heroui/toast";
-import { IconCreditCardPay, IconTicket } from "@tabler/icons-react";
+import { IconTicket } from "@tabler/icons-react";
 import { FormData } from '@/types';
 import { PurchaseDataTable } from "./purchaseDataTable";
 
 
 
 export const PurchaseForm: React.FC = () => {
-    // const [submitted, setSubmitted] = useState(false);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const [formData, setFormData] = useState<FormData>({
         fullName: "",
@@ -19,34 +18,13 @@ export const PurchaseForm: React.FC = () => {
         numberPhone: "",
         titularyCta: "",
         quantity: 2,
-        paymentMethod: "",
         receipt: null,
         transactionNumber: "",
     });
 
-    // const validateForm = (data: FormData) => {
-    //     const newErrors: { [key: string]: string } = {};
-
-    //     // Validar los campos obligatorios
-    //     if (!data.fullName) newErrors.fullName = "Por favor ingresa un nombre válido";
-    //     if (!data.email) newErrors.email = "Por favor ingresa un email";
-    //     if (data.email !== data.emailVerify)
-    //         newErrors.emailVerify = "Los emails no coinciden";
-    //     if (!data.numberPhone) newErrors.numberPhone = "Por favor ingresa un número de teléfono válido";
-    //     if (!data.titularyCta) newErrors.titularyCta = "Por favor ingresa el titular de la cuenta";
-    //     if (!data.quantity || data.quantity <= 0)
-    //         newErrors.quantity = "Por favor ingresa un número de tickets válido";
-    //     if (!data.paymentMethod) newErrors.paymentMethod = "Por favor selecciona un método de pago";
-    //     if (!data.transactionNumber) newErrors.transactionNumber = "Por favor ingresa un número de operación o referencia";
-    //     if (!data.receipt) newErrors.receipt = "Por favor carga un comprobante";
-
-    //     return newErrors;
-    // };
-
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
 
-        // Verificamos si el input es de tipo "file"
         if (type === "file" && e.target instanceof HTMLInputElement) {
             const files = e.target.files ? e.target.files[0] : null;
             setFormData((prevState) => ({
@@ -78,12 +56,6 @@ export const PurchaseForm: React.FC = () => {
             timeout: 10000,
             shouldShowTimeoutProgress: true,
         });
-        // const validationErrors = validateForm(formData);
-
-        // if (Object.keys(validationErrors).length > 0) {
-        //     setErrors(validationErrors);
-        //     return;
-        // }
 
         setFormData({
             fullName: "",
@@ -92,7 +64,6 @@ export const PurchaseForm: React.FC = () => {
             numberPhone: "",
             titularyCta: "",
             quantity: 2,
-            paymentMethod: "",
             receipt: null,
             transactionNumber: "",
         })
@@ -173,23 +144,7 @@ export const PurchaseForm: React.FC = () => {
                     onValueChange={onQuantityChange}
                     errorMessage={errors.quantity}
                 />
-                <Select
-                    label="Método de pago"
-                    placeholder="Seleccionar"
-                    startContent={<IconCreditCardPay stroke={2} />}
-                    name="paymentMethod"
-                    value={formData.paymentMethod}
-                    onChange={onChange}
-                    errorMessage={errors.paymentMethod}
-                >
-                    <SelectItem key={0}>Banesco</SelectItem>
-                    <SelectItem key={5}>Mercantil</SelectItem>
-                    <SelectItem key={2}>Zelle</SelectItem>
-                    <SelectItem key={3}>Santander Rio</SelectItem>
-                    <SelectItem key={4}>Binance</SelectItem>
-                    <SelectItem key={6}>Banesco Panama</SelectItem>
-                    <SelectItem key={7}>Bank of America</SelectItem>
-                </Select>
+                
 
                 <PurchaseDataTable></PurchaseDataTable>
 

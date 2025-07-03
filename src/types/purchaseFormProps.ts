@@ -5,7 +5,6 @@ export interface FormData {
     numberPhone: string;
     titularyCta: string;
     quantity: number;
-    paymentMethod: string;
     receipt: File | null;
     transactionNumber: string;
 }
