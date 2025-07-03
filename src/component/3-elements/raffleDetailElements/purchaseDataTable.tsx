@@ -1,16 +1,26 @@
 import React from 'react';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Select, SelectItem } from '@heroui/react';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Select, SelectItem, addToast } from '@heroui/react';
 import { IconCopy, IconCreditCardPay } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { selectAccount } from '@/store/slices/banksAcounts';
 
-export const PurchaseDataTable = () => {
+export const PurchaseDataTable = ({ totalPrice }: { totalPrice: number }) => {
     const selectedAccount = useSelector((state: RootState) => state.BanksAcounts);
     const dispatch = useDispatch();
 
     const handleSelectChange = (paymentMethodId: number) => {
-        dispatch(selectAccount(paymentMethodId));  // Despachamos el ID para buscar la cuenta
+        dispatch(selectAccount(paymentMethodId)); // Despachamos el ID para buscar la cuenta
+    };
+
+    const handleCopy = (text: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            addToast({
+                title: "Texto copiado en el portapapeles"
+            })
+        }).catch(err => {
+            console.error('Error al copiar al portapapeles:', err);
+        });
     };
 
     return (
@@ -22,16 +32,16 @@ export const PurchaseDataTable = () => {
                 onChange={(e) => handleSelectChange(Number(e.target.value))}
                 name="paymentMethod"
             >
-                <SelectItem key="11">Banesco</SelectItem>
-                <SelectItem key="12">Mercantil</SelectItem>
-                <SelectItem key="13">Santander Rio</SelectItem>
-                <SelectItem key="14">Binance</SelectItem>
-                <SelectItem key="15">Zelle</SelectItem>
-                <SelectItem key="16">Banesco Panama</SelectItem>
-                <SelectItem key="17">Bank of America</SelectItem>
+                <SelectItem key="11" >Banesco</SelectItem>
+                <SelectItem key="12" >Mercantil</SelectItem>
+                <SelectItem key="13" >Santander Rio</SelectItem>
+                <SelectItem key="14" >Binance</SelectItem>
+                <SelectItem key="15" >Zelle</SelectItem>
+                <SelectItem key="16" >Banesco Panama</SelectItem>
+                <SelectItem key="17" >Bank of America</SelectItem>
             </Select>
 
-            {selectedAccount.id!= 0 && (
+            {selectedAccount.id !== 0 && (
                 <Table aria-label="Datos de cuenta para pagar" color="default" selectionMode="single">
                     <TableHeader>
                         <TableColumn>Tipo</TableColumn>
@@ -39,42 +49,27 @@ export const PurchaseDataTable = () => {
                         <TableColumn>Acción</TableColumn>
                     </TableHeader>
                     <TableBody>
-                        <TableRow>
-                            <TableCell>Documento</TableCell>
-                            <TableCell>{selectedAccount.Documento}</TableCell>
-                            <TableCell>
-                                <Button isIconOnly aria-label="Copiar" variant="light">
-                                    <IconCopy stroke={1} />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Telefono</TableCell>
-                            <TableCell>{selectedAccount.Telefono}</TableCell>
-                            <TableCell>
-                                <Button isIconOnly aria-label="Copiar" variant="light">
-                                    <IconCopy stroke={1} />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Titular</TableCell>
-                            <TableCell>{selectedAccount.Titular}</TableCell>
-                            <TableCell>
-                                <Button isIconOnly aria-label="Copiar" variant="light">
-                                    <IconCopy stroke={1} />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Total</TableCell>
-                            <TableCell>389,21</TableCell>
-                            <TableCell>
-                                <Button isIconOnly aria-label="Copiar" variant="light">
-                                    <IconCopy stroke={1} />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
+                        {[
+                            { label: 'Documento', value: selectedAccount.Documento },
+                            { label: 'Telefono', value: selectedAccount.Telefono },
+                            { label: 'Titular', value: selectedAccount.Titular },
+                            { label: 'Total', value: `${totalPrice} Bs` }
+                        ].map((row, index) => (
+                            <TableRow key={index}>
+                                <TableCell>{row.label}</TableCell>
+                                <TableCell>{row.value}</TableCell>
+                                <TableCell>
+                                    <Button
+                                        isIconOnly
+                                        aria-label="Copiar"
+                                        variant="light"
+                                        onClick={() => handleCopy(row.value.toString())}
+                                    >
+                                        <IconCopy stroke={1} />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             )}

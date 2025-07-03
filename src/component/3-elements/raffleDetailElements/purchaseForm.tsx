@@ -1,16 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input, NumberInput } from "@heroui/react";
 import { addToast } from "@heroui/toast";
 import { IconTicket } from "@tabler/icons-react";
 import { FormData } from '@/types';
 import { PurchaseDataTable } from "./purchaseDataTable";
-
+import { RootState } from "@/store";
+import { useSelector } from "react-redux";
 
 
 export const PurchaseForm: React.FC = () => {
+    const rateBcv = useSelector((state: RootState) => state.RateBcv.price)
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [totalPrice, setTotalPrice] = useState<number>(0);
     const [formData, setFormData] = useState<FormData>({
         fullName: "",
         email: "",
@@ -21,6 +24,15 @@ export const PurchaseForm: React.FC = () => {
         receipt: null,
         transactionNumber: "",
     });
+    const onQuantityChange = (value: number) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            quantity: value,
+        }));
+
+        const calculatedTotal = value * rateBcv;
+        setTotalPrice(calculatedTotal);
+    };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
@@ -37,13 +49,6 @@ export const PurchaseForm: React.FC = () => {
                 [name]: value,
             }));
         }
-    };
-
-    const onQuantityChange = (value: number) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            quantity: value,
-        }));
     };
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -70,6 +75,11 @@ export const PurchaseForm: React.FC = () => {
         setErrors({});
 
     };
+    useEffect(() => {
+        if (rateBcv) {
+            setTotalPrice(rateBcv * formData.quantity);
+        }
+    }, [rateBcv, formData.quantity]);
 
     return (
         <div className="w-full flex flex-col px-10 2xl:px-[10%] items-center">
@@ -144,9 +154,7 @@ export const PurchaseForm: React.FC = () => {
                     onValueChange={onQuantityChange}
                     errorMessage={errors.quantity}
                 />
-                
-
-                <PurchaseDataTable></PurchaseDataTable>
+                <PurchaseDataTable totalPrice={totalPrice} />
 
                 <Input
                     isRequired
@@ -169,7 +177,7 @@ export const PurchaseForm: React.FC = () => {
                     type="text"
                 />
                 <div className=" flex gap-2 items-center">
-                    <strong className="text-xl">Total compra : 389,21 bs</strong>
+                    <strong className="text-xl">Total compra : {totalPrice} bs</strong>
                 </div>
 
                 <div className="flex gap-2 m-auto">
