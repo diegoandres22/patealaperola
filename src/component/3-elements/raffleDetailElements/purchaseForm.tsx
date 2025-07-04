@@ -5,15 +5,14 @@ import { Button, Form, Input, NumberInput } from "@heroui/react";
 import { addToast } from "@heroui/toast";
 import { IconTicket } from "@tabler/icons-react";
 import { FormData } from '@/types';
-import { PurchaseDataTable } from "./purchaseDataTable";
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
-
+import { PurchaseDataTable } from "./purchaseDataTable";
 
 export const PurchaseForm: React.FC = () => {
-    const rateBcv = useSelector((state: RootState) => state.RateBcv.price)
+    const rateBcv = useSelector((state: RootState) => state.RateBcv.price);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
-    const [totalPrice, setTotalPrice] = useState<number>(0);
+    const [totalPrice, setTotalPrice] = useState<number | string>("0");
     const [formData, setFormData] = useState<FormData>({
         fullName: "",
         email: "",
@@ -24,20 +23,21 @@ export const PurchaseForm: React.FC = () => {
         receipt: null,
         transactionNumber: "",
     });
+
     const onQuantityChange = (value: number) => {
         setFormData((prevState) => ({
             ...prevState,
             quantity: value,
         }));
 
-        const calculatedTotal = value * rateBcv;
-        setTotalPrice(calculatedTotal);
+        const calculatedTotal = Math.round(value * rateBcv * 100) / 100;
+        setTotalPrice(calculatedTotal); // Almacenar solo el valor redondeado
     };
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
 
-        if (type === "file" && e.target instanceof HTMLInputElement) {
+        if (type === "file") {
             const files = e.target.files ? e.target.files[0] : null;
             setFormData((prevState) => ({
                 ...prevState,
@@ -62,6 +62,7 @@ export const PurchaseForm: React.FC = () => {
             shouldShowTimeoutProgress: true,
         });
 
+        // Resetear formulario
         setFormData({
             fullName: "",
             email: "",
@@ -71,13 +72,13 @@ export const PurchaseForm: React.FC = () => {
             quantity: 2,
             receipt: null,
             transactionNumber: "",
-        })
+        });
         setErrors({});
-
     };
+
     useEffect(() => {
         if (rateBcv) {
-            setTotalPrice(rateBcv * formData.quantity);
+            setTotalPrice(rateBcv * formData.quantity); // Actualizar total al cargar rateBcv
         }
     }, [rateBcv, formData.quantity]);
 
@@ -154,7 +155,7 @@ export const PurchaseForm: React.FC = () => {
                     onValueChange={onQuantityChange}
                     errorMessage={errors.quantity}
                 />
-                <PurchaseDataTable totalPrice={totalPrice} />
+                <PurchaseDataTable totalPrice={parseFloat(totalPrice.toString()).toFixed(2)} />
 
                 <Input
                     isRequired
@@ -177,7 +178,9 @@ export const PurchaseForm: React.FC = () => {
                     type="text"
                 />
                 <div className=" flex gap-2 items-center">
-                    <strong className="text-xl">Total compra : {totalPrice} bs</strong>
+                    <strong className="text-xl">
+                        Total compra: {parseFloat(totalPrice.toString()).toFixed(2)} bs
+                    </strong>
                 </div>
 
                 <div className="flex gap-2 m-auto">

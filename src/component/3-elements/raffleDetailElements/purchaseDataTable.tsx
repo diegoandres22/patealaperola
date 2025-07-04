@@ -3,9 +3,9 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button
 import { IconCopy, IconCreditCardPay } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { selectAccount } from '@/store/slices/banksAcounts';
+import { selectAccount } from '@/store/slices/banksAcountsSlice';
 
-export const PurchaseDataTable = ({ totalPrice }: { totalPrice: number }) => {
+export const PurchaseDataTable = ({ totalPrice }: { totalPrice: number | string }) => {
     const selectedAccount = useSelector((state: RootState) => state.BanksAcounts);
     const dispatch = useDispatch();
 
