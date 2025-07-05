@@ -10,7 +10,7 @@ export const PurchaseDataTable = ({ totalPrice }: { totalPrice: number | string 
     const dispatch = useDispatch();
 
     const handleSelectChange = (paymentMethodId: number) => {
-        dispatch(selectAccount(paymentMethodId)); // Despachamos el ID para buscar la cuenta
+        dispatch(selectAccount(paymentMethodId)); 
     };
 
     const handleCopy = (text: string) => {

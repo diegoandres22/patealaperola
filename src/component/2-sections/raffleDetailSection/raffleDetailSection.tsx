@@ -1,20 +1,31 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ArrowAndTitle, ImageRaffle, PurchaseForm, RaffleData } from '@/component/3-elements'
 import { Divider } from '@heroui/react'
 import { ValidateTicket } from '@/component/3-elements/raffleDetailElements/validateTicket'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '@/store'
+import { useParams } from 'next/navigation'
+import { setRaffleById } from '@/store/slices/raffleDetailSlice'
 
 export const RaffleDetailSection = () => {
+    const dispatch = useDispatch<AppDispatch>();
 
+
+    const params = useParams<{ id: string }>()
     const raffleState = useSelector((state: RootState) => state.RaffleDetail);
 
+    useEffect(() => {
+        const raffleId = parseInt(params.id, 10); 
+        if (!isNaN(raffleId)) { 
+            dispatch(setRaffleById(raffleId));
+        }
+    }, [params.id, dispatch]);
 
     return (
         <div className="min-h-screen w-11/12 md:w-3/4 bg-neutral-700/30 rounded-xl flex flex-col gap-5">
             <ArrowAndTitle title={raffleState.title} />
-            <ImageRaffle imageUrl={raffleState.image} />
+            {raffleState.image && <ImageRaffle imageUrl={raffleState.image} />}
             <div className="flex xl:hidden">
                 <RaffleData
                     description={raffleState.description}

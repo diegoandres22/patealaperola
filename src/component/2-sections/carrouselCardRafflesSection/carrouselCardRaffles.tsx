@@ -7,7 +7,7 @@ export const CarrouselCardRaffles: React.FC<RafflesState> = ({ raffles }) => {
         <div className="flex md:w-full flex-col md:flex-row items-center md:items-start gap-10 flex-wrap " id='Winners'>
             {raffles.map((raffle, index) => (
                 <CardRaffles
-                    id={index}
+                    id={raffle.id}
                     key={index}
                     title={raffle.title}
                     image={raffle.image}
