@@ -73,9 +73,9 @@ export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticke
                     )}
                 </div>
             </div>
-            <div className="w-full h-auto flex pt-2 justify-between">
-                <p>Precio del ticket:{ticketPrice}$</p>
-                <p className='flex gap-1'>Compra mínima: {minPurchase} <IconTicket stroke={1} /></p>
+            <div className="w-full h-auto flex gap-2 sm:gap-0 pt-2 justify-between flex-col sm:flex-row">
+                <p>Precio del ticket: {ticketPrice}$</p>
+                <p className='flex gap-1 text-nowrap'>Compra mínima: {minPurchase} <IconTicket stroke={1} /></p>
             </div>
         </div>
     );
