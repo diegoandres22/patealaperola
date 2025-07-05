@@ -38,8 +38,8 @@ export const RaffleDetailSection = () => {
                 <RaffleData
                     description={description}
                     raffleDetails={raffleDetails}
-                    id={0} ticketPrice={0}
-                    minPurchase={0} raffleStatus={0}
+                    id={id} ticketPrice={ticketPrice}
+                    minPurchase={minPurchase} raffleStatus={0}
                     title={''} image={''} />
                 <ValidateTicket />
             </div>
