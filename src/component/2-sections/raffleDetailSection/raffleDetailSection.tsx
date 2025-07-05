@@ -11,33 +11,33 @@ import { setRaffleById } from '@/store/slices/raffleDetailSlice'
 export const RaffleDetailSection = () => {
     const dispatch = useDispatch<AppDispatch>();
 
-
     const params = useParams<{ id: string }>()
-    const raffleState = useSelector((state: RootState) => state.RaffleDetail);
+    const {id, title, image, description, raffleDetails, ticketPrice, minPurchase } = useSelector((state: RootState) => state.RaffleDetail);
 
     useEffect(() => {
-        const raffleId = parseInt(params.id, 10); 
-        if (!isNaN(raffleId)) { 
+        const raffleId = parseInt(params.id, 10);
+        if (!isNaN(raffleId)) {
             dispatch(setRaffleById(raffleId));
         }
     }, [params.id, dispatch]);
 
     return (
         <div className="min-h-screen w-11/12 md:w-3/4 bg-neutral-700/30 rounded-xl flex flex-col gap-5">
-            <ArrowAndTitle title={raffleState.title} />
-            {raffleState.image && <ImageRaffle imageUrl={raffleState.image} />}
+
+            <ArrowAndTitle title={title} />
+            <ImageRaffle imageUrl={image} />
             <div className="flex xl:hidden">
                 <RaffleData
-                    description={raffleState.description}
-                    raffleDetails={raffleState.raffleDetails}
-                    id={0} ticketPrice={0}
-                    minPurchase={0} raffleStatus={0}
+                    description={description}
+                    raffleDetails={raffleDetails}
+                    id={id} ticketPrice={ticketPrice}
+                    minPurchase={minPurchase} raffleStatus={0}
                     title={''} image={''} />
             </div>
             <div className=" hidden xl:flex">
                 <RaffleData
-                    description={raffleState.description}
-                    raffleDetails={raffleState.raffleDetails}
+                    description={description}
+                    raffleDetails={raffleDetails}
                     id={0} ticketPrice={0}
                     minPurchase={0} raffleStatus={0}
                     title={''} image={''} />
