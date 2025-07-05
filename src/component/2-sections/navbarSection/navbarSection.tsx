@@ -18,16 +18,10 @@ import { LogoImage } from '@/component/3-elements';
 export const NaavbarSection = () => {
 
   return (
-    <Navbar className='bg-black bg-transparent py-4' isBlurred>
+    <Navbar className='bg-black bg-transparent py-4' >
 
-      <NavbarContent className="flex sm:hidden " justify="start">
+      <NavbarContent justify="start">
         <NavbarBrand>
-          <LogoImage />
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex " justify="start">
-        <NavbarBrand >
           <LogoImage />
         </NavbarBrand>
       </NavbarContent>
