@@ -8,7 +8,7 @@ import { Raffle } from '@/types'
 
 
 
-export const Start = () => {
+export const StartScreen = () => {
   const raffles = useSelector((state: RootState) => state.Raffles.raffles)
 
   const activeAndLastRaffles = [

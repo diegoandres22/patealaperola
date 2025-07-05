@@ -13,7 +13,7 @@ export function ProviderComp({ children }: Readonly<{
     children: React.ReactNode;
 }>) {
     const pathname = usePathname()
-    const isDynamicRoute = pathname.includes('/raffles');
+    const isDynamicRoute = pathname.includes('/raffle');
 
     return (
         <HeroUIProvider>

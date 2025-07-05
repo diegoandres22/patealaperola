@@ -1,10 +1,8 @@
-import { Raffle, RafflesState } from "@/types";
+import { Raffle } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-
-const initialState: RafflesState = {
-    raffles: [
-        {
+const allRaffles: Raffle[] = [
+    {
         "id": 11,
         "title": "Patea la Perola 1",
         "ticketPrice": 1,
@@ -64,17 +62,38 @@ const initialState: RafflesState = {
             "additionalPrize": "$1,500 en efectivo"
         }
     }
-    ]
-}
+];
+const initialState: Raffle = {
+    id: 9,
+    title: "ESTADO INICIAL",
+    ticketPrice: 0,
+    minPurchase: 0,
+    raffleStatus: 0,
+    image: "",
+    description: "",
+    raffleDetails: { trophy: "", secondPrize: "", ticketNumbers: [""], additionalPrize: "" }
+};
 
-const raffleSlice = createSlice({
-    name: "raffles",
+const raffleDetailSlice = createSlice({
+    name: "raffleDetail",
     initialState,
     reducers: {
-        setRaffles: (state, action: PayloadAction<Raffle[]>) => {
-            state.raffles = action.payload;
+        setRaffleById: (state, action: PayloadAction<number>) => {
+            const raffle = allRaffles.find((raffle) => raffle.id === action.payload);
+
+            if (raffle) {
+                state.id = raffle.id;
+                state.title = raffle.title;
+                state.ticketPrice = raffle.ticketPrice;
+                state.minPurchase = raffle.minPurchase;
+                state.raffleStatus = raffle.raffleStatus;
+                state.image = raffle.image;
+                state.description = raffle.description;
+                state.raffleDetails = raffle.raffleDetails;
+            }
         }
-    },
+    }
 });
 
-export default raffleSlice.reducer;
+export const { setRaffleById } = raffleDetailSlice.actions;
+export default raffleDetailSlice.reducer;

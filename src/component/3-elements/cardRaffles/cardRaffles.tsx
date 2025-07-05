@@ -3,7 +3,9 @@ import { Card, CardFooter, CardHeader, Chip, Link } from '@heroui/react'
 import { Image } from "@heroui/image";
 import { Raffle } from '@/types';
 
-export const CardRaffles: React.FC<Raffle> = ({ title, image, ticketPrice, minPurchase, raffleStatus }) => {
+
+export const CardRaffles: React.FC<Raffle> = ({ id, title, image, ticketPrice, minPurchase, raffleStatus }) => {
+
 
     let chipLabel = '';
     let chipColor: 'danger' | 'success' | 'warning' | 'secondary' | 'primary' | 'default' = 'danger';
@@ -25,7 +27,7 @@ export const CardRaffles: React.FC<Raffle> = ({ title, image, ticketPrice, minPu
     }
 
     return (
-        <Link href="/raffles" className='w-[300px] h-[300px]' color='secondary'>
+        <Link href={`/raffle/${id}`}  className='w-[300px] h-[300px]' color='secondary' >
             <Card isFooterBlurred className="w-[300px] h-[300px] col-span-12 sm:col-span-5 hover:scale-110 transition-transform 
         duration-300 ease-in-out ">
                 <CardHeader className="absolute z-10 top-1 flex-col items-start">
