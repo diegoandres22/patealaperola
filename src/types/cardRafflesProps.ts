@@ -1,10 +1,5 @@
 
-interface RaffleDetails {
-    trophy: string;
-    secondPrize: string;
-    ticketNumbers: string[];
-    additionalPrize: string;
-}
+
 
 export interface Raffle {
     id: number;
@@ -14,7 +9,10 @@ export interface Raffle {
     title: string;
     image: string;
     description: string;
-    raffleDetails: RaffleDetails;
+    trophy: string;
+    secondPrize: string;
+    ticketNumbers: string[];
+    additionalPrize: string;
 }
 
 export interface RafflesState {

@@ -10,12 +10,11 @@ const allRaffles: Raffle[] = [
         "raffleStatus": 1,
         "image": "https://lanchasvenezuela.com/wp-content/uploads/2023/09/MOTO-SEA-DOO-GTI-155-VENTA-DE-MOTO-SEA-DOO-GTI-155-MOTO-SEA-DOO-GTI-155-DE-HIGUEROTE-1.png",
         "description": "¡Participa en esta Gran Rifa de Patea la perola y gana!",
-        "raffleDetails": {
-            "trophy": "centinela 350cc acuatica",
-            "secondPrize": "$4,000 en EFECTIVO",
-            "ticketNumbers": ["1232", "5345", "4232", "6732"],
-            "additionalPrize": "$1,500 en efectivo"
-        }
+        "trophy": "centinela 350cc acuatica",
+        "secondPrize": "$4,000 en EFECTIVO",
+        "ticketNumbers": ["1232", "5345", "4232", "6732"],
+        "additionalPrize": "$1,500 en efectivo"
+
     },
     {
         "id": 12,
@@ -25,12 +24,10 @@ const allRaffles: Raffle[] = [
         "raffleStatus": 2,
         "image": "https://i.pinimg.com/originals/28/37/c3/2837c3003feb2dea72446c3554bae990.jpg",
         "description": "¡Participa en esta Gran Rifa de Patea la perola y gana!",
-        "raffleDetails": {
-            "trophy": "Machito 4 puertas 2020",
-            "secondPrize": "$5,000 en EFECTIVO",
-            "ticketNumbers": ["2345", "6789", "1123", "4456"],
-            "additionalPrize": "$2,000 en efectivo"
-        }
+        "trophy": "Machito 4 puertas 2020",
+        "secondPrize": "$5,000 en EFECTIVO",
+        "ticketNumbers": ["2345", "6789", "1123", "4456"],
+        "additionalPrize": "$2,000 en efectivo"
     },
     {
         "id": 13,
@@ -40,12 +37,10 @@ const allRaffles: Raffle[] = [
         "raffleStatus": 3,
         "image": "https://cdn3.riastatic.com/photosnew/auto/photo/toyota_corolla__569815708f.jpg",
         "description": "¡Participa en esta Gran Rifa de Patea la perola y gana!",
-        "raffleDetails": {
-            "trophy": "Toyota corolla 2007",
-            "secondPrize": "Bono de $3,000 para viajes",
-            "ticketNumbers": ["5678", "9876", "4532", "7890"],
-            "additionalPrize": "$1,000 en efectivo"
-        }
+        "trophy": "Toyota corolla 2007",
+        "secondPrize": "Bono de $3,000 para viajes",
+        "ticketNumbers": ["5678", "9876", "4532", "7890"],
+        "additionalPrize": "$1,000 en efectivo"
     },
     {
         "id": 14,
@@ -55,12 +50,10 @@ const allRaffles: Raffle[] = [
         "raffleStatus": 3,
         "image": "https://img.olx.com.br/images/53/538495577085359.jpg",
         "description": "¡Participa en esta Gran Rifa de Patea la perola y gana!",
-        "raffleDetails": {
-            "trophy": "Harley Davidson 2022",
-            "secondPrize": "$2,500 en EFECTIVO",
-            "ticketNumbers": ["3456", "7891", "6723", "2341"],
-            "additionalPrize": "$1,500 en efectivo"
-        }
+        "trophy": "Harley Davidson 2022",
+        "secondPrize": "$2,500 en EFECTIVO",
+        "ticketNumbers": ["3456", "7891", "6723", "2341"],
+        "additionalPrize": "$1,500 en efectivo"
     }
 ];
 const initialState: Raffle = {
@@ -71,7 +64,7 @@ const initialState: Raffle = {
     raffleStatus: 0,
     image: "",
     description: "",
-    raffleDetails: { trophy: "", secondPrize: "", ticketNumbers: [""], additionalPrize: "" }
+    trophy: "", secondPrize: "", ticketNumbers: [""], additionalPrize: ""
 };
 
 const raffleDetailSlice = createSlice({
@@ -89,7 +82,10 @@ const raffleDetailSlice = createSlice({
                 state.raffleStatus = raffle.raffleStatus;
                 state.image = raffle.image;
                 state.description = raffle.description;
-                state.raffleDetails = raffle.raffleDetails;
+                state.trophy = raffle.trophy;
+                state.secondPrize = raffle.secondPrize;
+                state.ticketNumbers = raffle.ticketNumbers;
+                state.additionalPrize = raffle.additionalPrize;
             }
         }
     }
