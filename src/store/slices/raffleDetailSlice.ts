@@ -1,7 +1,7 @@
 import { Raffle } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const allRaffles: Raffle[] = [
+export const allRaffles: Raffle[] = [
     {
         "id": 11,
         "title": "Patea la Perola 1",
