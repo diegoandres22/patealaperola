@@ -13,8 +13,10 @@ export const CarrouselCardRaffles: React.FC<RafflesState> = ({ raffles }) => {
                     image={raffle.image}
                     ticketPrice={raffle.ticketPrice}
                     minPurchase={raffle.minPurchase}
-                    raffleStatus={raffle.raffleStatus} description={''}
-                    raffleDetails={raffle.raffleDetails} />
+                    raffleStatus={raffle.raffleStatus} description={raffle.description}
+                    trophy={raffle.trophy} secondPrize={raffle.secondPrize}
+                    ticketNumbers={raffle.ticketNumbers} additionalPrize={raffle.additionalPrize}
+                />
             ))}
         </div>
     )

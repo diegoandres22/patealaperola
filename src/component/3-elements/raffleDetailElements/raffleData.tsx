@@ -4,15 +4,14 @@ import { IconTicket } from '@tabler/icons-react';
 import React, { useEffect, useState } from 'react';
 
 
-export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticketPrice, minPurchase }) => {
+export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, ticketNumbers, additionalPrize }) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        if (raffleDetails && raffleDetails.trophy) {
-            setIsLoading(false);
-        }
-    }, [raffleDetails]);
-
+  useEffect(() => {
+      if ( trophy) {
+          setIsLoading(false);
+      }
+  }, [trophy]);
 
     return (
         <div className='flex flex-col sm:mx-6 px-10 2xl:px-[10%] gap-2'>
@@ -30,7 +29,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticke
                     <div className="h-10 w-full rounded-lg" />
                 </Skeleton>
             ) : (
-                <h2 className="text-4xl">{raffleDetails.trophy}</h2>
+                <h2 className="text-4xl">{trophy}</h2>
             )}
             <p>O también </p>
 
@@ -39,7 +38,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticke
                     <div className="h-10 w-full rounded-lg" />
                 </Skeleton>
             ) : (
-                <h3>{raffleDetails.secondPrize}</h3>
+                <h3>{secondPrize}</h3>
             )}
 
             <p className='mt-5'>También ganan</p>
@@ -54,7 +53,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticke
                                 <div className="h-10 w-full rounded-lg" />
                             </Skeleton>
                         ) : (
-                            raffleDetails.ticketNumbers.map((ticket, index) => (
+                            ticketNumbers.map((ticket, index) => (
                                 <div key={index} className="w-1/2 h-1/2 flex items-center justify-center my-1">
                                     <p className="border-1 p-1 rounded-md">{ticket}</p>
                                 </div>
@@ -69,7 +68,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, raffleDetails, ticke
                             <div className="h-10 w-full rounded-lg" />
                         </Skeleton>
                     ) : (
-                        <p>{raffleDetails.additionalPrize}</p>
+                        <p>{additionalPrize}</p>
                     )}
                 </div>
             </div>

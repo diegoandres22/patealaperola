@@ -12,7 +12,7 @@ export const RaffleDetailSection = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const params = useParams<{ id: string }>()
-    const {id, title, image, description, raffleDetails, ticketPrice, minPurchase } = useSelector((state: RootState) => state.RaffleDetail);
+    const { id, title, image, description, ticketPrice, minPurchase, trophy, secondPrize, ticketNumbers, additionalPrize } = useSelector((state: RootState) => state.RaffleDetail);
 
     useEffect(() => {
         const raffleId = parseInt(params.id, 10);
@@ -28,19 +28,18 @@ export const RaffleDetailSection = () => {
             <ImageRaffle imageUrl={image} />
             <div className="flex xl:hidden">
                 <RaffleData
-                    description={description}
-                    raffleDetails={raffleDetails}
-                    id={id} ticketPrice={ticketPrice}
+                    description={description} id={id} ticketPrice={ticketPrice}
                     minPurchase={minPurchase} raffleStatus={0}
-                    title={''} image={''} />
+                    title={title} image={image} trophy={trophy} secondPrize={secondPrize}
+                    ticketNumbers={ticketNumbers} additionalPrize={additionalPrize} />
             </div>
             <div className=" hidden xl:flex">
                 <RaffleData
                     description={description}
-                    raffleDetails={raffleDetails}
                     id={id} ticketPrice={ticketPrice}
                     minPurchase={minPurchase} raffleStatus={0}
-                    title={''} image={''} />
+                    title={title} image={image} trophy={trophy} secondPrize={secondPrize}
+                    ticketNumbers={ticketNumbers} additionalPrize={additionalPrize} />
                 <ValidateTicket />
             </div>
             <Divider className="my-1 bg-white/50 w-10/12 mx-auto" />
