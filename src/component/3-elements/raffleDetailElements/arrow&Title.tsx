@@ -1,23 +1,23 @@
 import { Button, Skeleton } from '@heroui/react';
 import { IconArrowLeft } from '@tabler/icons-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
-interface ArrowAndTitleProps {
-    title: string;
-}
 
-export const ArrowAndTitle = ({ title }: ArrowAndTitleProps) => {
+type ArrowAndTitleProps = {
+    title: string | undefined;
+    loading: boolean;
+};
+
+export const ArrowAndTitle = ({ title, loading }: ArrowAndTitleProps): React.JSX.Element => {
+
     const handleBackClick = () => {
         window.history.back();
     };
 
-    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        if (title) {
-            setIsLoading(false);
-        }
-    }, [title]);
+       
+    }, [title, loading]);
 
     return (
         <div className='w-full md:w-4/5 pt-6 pl-6 flex'>
@@ -25,7 +25,7 @@ export const ArrowAndTitle = ({ title }: ArrowAndTitleProps) => {
                 <IconArrowLeft stroke={3} className='text-white scale-110 md:scale-150' />
             </Button>
 
-            {isLoading ?
+            {loading ?
                 <Skeleton className="rounded-md w-full h-full ">
                     <div className="h-auto w-full rounded-lg " />
                 </Skeleton>

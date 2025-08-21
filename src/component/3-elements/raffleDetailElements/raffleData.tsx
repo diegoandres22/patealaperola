@@ -1,22 +1,30 @@
-import { Raffle } from '@/types';
 import { Skeleton } from '@heroui/react';
 import { IconTicket } from '@tabler/icons-react';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 
-export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, ticketNumbers, additionalPrize }) => {
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+type RaffleDataProps = { 
+    description: string | undefined; 
+    id: string | undefined;
+    ticketPrice: number | undefined; 
+    minPurchase: number | undefined; 
+    raffleStatus: number | undefined; 
+    trophy: string | undefined; 
+    secondPrize: string | undefined; 
+    additionalPrize: string | undefined; 
+    loading: boolean;
+}
+
+export const RaffleData: React.FC<RaffleDataProps> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading }) => {
 
   useEffect(() => {
-      if ( trophy) {
-          setIsLoading(false);
-      }
-  }, [trophy]);
+  
+  }, [description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading]);
 
     return (
         <div className='flex flex-col sm:mx-6 px-10 2xl:px-[10%] gap-2'>
 
-            {isLoading ? (
+            {loading ? (
                 <Skeleton className="rounded-md w-full h-full">
                     <div className="h-10 w-full rounded-lg" />
                 </Skeleton>
@@ -24,7 +32,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurc
                 <p>{description}</p>
             )}
 
-            {isLoading ? (
+            {loading ? (
                 <Skeleton className="rounded-md w-full h-full">
                     <div className="h-10 w-full rounded-lg" />
                 </Skeleton>
@@ -33,7 +41,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurc
             )}
             <p>O también </p>
 
-            {isLoading ? (
+            {loading ? (
                 <Skeleton className="rounded-md w-full h-full">
                     <div className="h-10 w-full rounded-lg" />
                 </Skeleton>
@@ -48,12 +56,12 @@ export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurc
                     <h5 className='w-full font-bold '>Tickets premiados</h5>
 
                     <div className="flex flex-wrap w-full h-full">
-                        {isLoading ? (
+                        {loading ? (
                             <Skeleton className="rounded-md w-full h-full">
                                 <div className="h-10 w-full rounded-lg" />
                             </Skeleton>
                         ) : (
-                            ticketNumbers.map((ticket, index) => (
+                            (["6666", "7777", "1982", "9944"]).map((ticket, index) => (
                                 <div key={index} className="w-1/2 h-1/2 flex items-center justify-center my-1">
                                     <p className="border-1 p-1 rounded-md">{ticket}</p>
                                 </div>
@@ -63,7 +71,7 @@ export const RaffleData: React.FC<Raffle> = ({ description, ticketPrice, minPurc
                 </div>
                 <div className="flex flex-col bg-neutral-700/20 rounded-2xl p-4 shadow-2xl gap-2 h-full w-full">
                     <h4 className='w-full font-bold'>Quien compre más números</h4>
-                    {isLoading ? (
+                    {loading ? (
                         <Skeleton className="rounded-md w-full h-full">
                             <div className="h-10 w-full rounded-lg" />
                         </Skeleton>

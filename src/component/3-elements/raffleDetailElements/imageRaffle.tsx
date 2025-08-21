@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Image } from '@heroui/image';
 import { Skeleton } from '@heroui/react';
-import { RootState } from '@/store';
-import { useSelector } from 'react-redux';
 
+type ImageProps = {
+    image: string | undefined;
+    loading: boolean;
+};
 
-export const ImageRaffle = ({ imageUrl }: {
-    imageUrl: string;
-}) => {
-
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-
-    const raffleState = useSelector((state: RootState) => state.RaffleDetail.image);
+export const ImageRaffle: React.FC<ImageProps> = ({ image, loading }) => {
 
     useEffect(() => {
 
-        if (raffleState) {
-            setIsLoading(false)
-        }
 
-    }, [raffleState]);
+    }, [image, loading]);
 
     return (
         <div className="w-full flex justify-center">
 
-            {isLoading ?
+            {loading ?
                 <div className="h-full w-full p-10">
                     <Skeleton className=" rounded-2xl h-full w-full">
                         <div className="h-80 rounded-lg " />
@@ -34,9 +27,8 @@ export const ImageRaffle = ({ imageUrl }: {
                 <Image
                     isBlurred
                     alt="Imagen de la rifa"
-                    src={imageUrl}
-                    width={900}
-                    onLoad={() => setIsLoading(false)}
+                    src={image}
+                    width={500}
                 />
             }
         </div>

@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import { CarrouselCardRaffles } from '@/component/2-sections'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store'
-
 import { Raffle } from '@/types'
 import { fetchRaffles } from '@/store/slices/rafflesSlice'
 

@@ -31,3 +31,9 @@ export interface RafflesState {
   loading: boolean;
   error: string | null;
 }
+
+export interface RaffleDetailState {
+  raffleDetail: Raffle | null;
+  loading: boolean;
+  error: string | null;
+}

@@ -1,4 +1,3 @@
-// src/services/raffleService.ts
 import axios from "axios";
 import { Raffle } from "@/types";
 
@@ -10,12 +9,8 @@ export const getRaffles = async (): Promise<Raffle[]> => {
   return (data as { Rifas: Raffle[] }).Rifas;
 };
 
-// export const getRaffleById = async (id: string): Promise<Raffle> => {
-//   const { data } = await axios.get(`${BASE_URL}/${id}`);
-//   return data;
-// };
+export const getRaffleById = async (id: string): Promise<Raffle> => {
+  const { data } = await axios.get(`${BASE_URL}/${id}`);
+  return data as Raffle;
+};
 
-// export const createRaffle = async (raffle: Partial<Raffle>): Promise<Raffle> => {
-//   const { data } = await axios.post(`${BASE_URL}/new/`, raffle);
-//   return data;
-// };
