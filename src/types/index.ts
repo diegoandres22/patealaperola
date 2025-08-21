@@ -1,7 +1,7 @@
 
 
 //Tipos para secciones
-export * from "./cardRafflesProps"
+export * from "./rafflesProps"
 
 //Tipos para elementos
 export * from "./purchaseFormProps"
