@@ -1,7 +1,7 @@
 export interface FormData {
+    id:string;
     fullName: string;
     email: string;
-    emailVerify: string;
     numberPhone: string;
     titularyCta: string;
     quantity: number;
