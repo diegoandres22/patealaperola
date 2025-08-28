@@ -4,83 +4,112 @@ import React, { useEffect, useState } from "react";
 import { Button, Form, Input, NumberInput } from "@heroui/react";
 import { addToast } from "@heroui/toast";
 import { IconTicket } from "@tabler/icons-react";
-import { FormData } from '@/types';
-import { RootState } from "@/store";
-import { useSelector } from "react-redux";
+import { FormData, RaffleDetailForm } from '@/types';
+import { AppDispatch, RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
 import { PurchaseDataTable } from "./purchaseDataTable";
+import { createNewPurchase } from "@/store/services/newPurchaseService";
+import { fetchBanks } from "@/store/services/bankAcountsService";
+import { resetSelectedBank } from "@/store/slices/banksAcountsSlice";
 
-export const PurchaseForm: React.FC = () => {
+export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
+    const dispatch = useDispatch<AppDispatch>();
     const rateBcv = useSelector((state: RootState) => state.RateBcv.price);
-    const [errors, setErrors] = useState<{ [key: string]: string }>({});
-    const [totalPrice, setTotalPrice] = useState<number | string>("0");
-    const [formData, setFormData] = useState<FormData>({
+    const { loading, success, error } = useSelector((state: RootState) => state.purchase);
+
+    const [paymentMethod, setPaymentMethod] = useState<string>("");
+    const initialFormData: FormData = {
+        id: id || "",
         fullName: "",
         email: "",
-        emailVerify: "",
         numberPhone: "",
         titularyCta: "",
         quantity: 2,
         receipt: null,
         transactionNumber: "",
-    });
-
-    const onQuantityChange = (value: number) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            quantity: value,
-        }));
-
-        const calculatedTotal = Math.round(value * rateBcv * 100) / 100;
-        setTotalPrice(calculatedTotal); // Almacenar solo el valor redondeado
     };
+    const [formData, setFormData] = useState<FormData>(initialFormData);
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [totalPrice, setTotalPrice] = useState<number>(0);
 
-    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        const { name, value, type } = e.target;
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, type } = e.target;
 
         if (type === "file") {
-            const files = e.target.files ? e.target.files[0] : null;
-            setFormData((prevState) => ({
-                ...prevState,
-                [name]: files,
+            const files = (e.target as HTMLInputElement).files;
+            const file = files ? files[0] : null;
+
+            if (file) {
+                const maxSizeMB = 5; // tamaño máximo 5MB
+                const allowedTypes = ["application/pdf", "image/jpeg", "image/png"];
+
+                if (!allowedTypes.includes(file.type)) {
+                    addToast({ title: "Tipo de archivo no permitido. Solo PDF, JPG o PNG", color: "danger" });
+                    setFormData(prev => ({ ...prev, [name]: null }));
+                    return;
+                }
+
+                if (file.size > maxSizeMB * 1024 * 1024) {
+                    addToast({ title: `Archivo demasiado grande, máximo ${maxSizeMB}MB`, color: "danger" });
+                    setFormData(prev => ({ ...prev, [name]: null }));
+                    return;
+                }
+            }
+
+            setFormData(prev => ({
+                ...prev,
+                [name]: file
             }));
         } else {
-            setFormData((prevState) => ({
-                ...prevState,
-                [name]: value,
-            }));
+            const value = (e.target as HTMLInputElement).value;
+            setFormData(prev => ({ ...prev, [name]: value }));
         }
     };
+
+
+    useEffect(() => {
+        setTotalPrice(Math.round(rateBcv * formData.quantity * 100) / 100);
+    }, [formData.quantity, rateBcv]);
+
+    // Mostrar toast cuando la compra sea exitosa
+    useEffect(() => {
+        dispatch(fetchBanks())
+        if (success) {
+            addToast({
+                title: "Compra realizada con éxito",
+                description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
+                color: "success",
+                timeout: 10000,
+                shouldShowTimeoutProgress: true,
+            });
+        }
+    }, [success, dispatch]);
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        addToast({
-            title: "Compra realizada con éxito",
-            description: "Dentro de las próximas 12 hs, soporte se contactará contigo",
-            color: "success",
-            timeout: 10000,
-            shouldShowTimeoutProgress: true,
-        });
+        dispatch(
+            createNewPurchase({
+                buyer_email: formData.email,
+                raffle_id: id || formData.id,
+                ticket_count: formData.quantity,
+                payment_method: paymentMethod,
+                payment_reference: formData.transactionNumber,
+                full_name: formData.fullName,
+                phone_number: formData.numberPhone,
+                holder_cta_bank: formData.titularyCta,
+                file: formData.receipt,
+            })
+        );
 
         // Resetear formulario
-        setFormData({
-            fullName: "",
-            email: "",
-            emailVerify: "",
-            numberPhone: "",
-            titularyCta: "",
-            quantity: 2,
-            receipt: null,
-            transactionNumber: "",
-        });
+        setFormData(initialFormData);
+        setPaymentMethod("");
         setErrors({});
+        dispatch(resetSelectedBank());
     };
 
-    useEffect(() => {
-        if (rateBcv) {
-            setTotalPrice(rateBcv * formData.quantity); // Actualizar total al cargar rateBcv
-        }
-    }, [rateBcv, formData.quantity]);
+    const totalPriceFormatted = totalPrice.toFixed(2);
 
     return (
         <div className="w-full flex flex-col px-10 2xl:px-[10%] items-center">
@@ -97,9 +126,10 @@ export const PurchaseForm: React.FC = () => {
                     labelPlacement="outside"
                     name="fullName"
                     value={formData.fullName}
-                    onChange={onChange}
+                    onChange={handleInputChange}
                     placeholder="Nombre y apellido"
                     type="text"
+                    max={50}
                 />
                 <Input
                     isRequired
@@ -108,20 +138,11 @@ export const PurchaseForm: React.FC = () => {
                     labelPlacement="outside"
                     name="email"
                     value={formData.email}
-                    onChange={onChange}
+                    onChange={handleInputChange}
                     placeholder="Email"
                     type="email"
-                />
-                <Input
-                    isRequired
-                    errorMessage={errors.emailVerify}
-                    label="Confirmar Email"
-                    labelPlacement="outside"
-                    name="emailVerify"
-                    value={formData.emailVerify}
-                    onChange={onChange}
-                    placeholder="Reingresar Email"
-                    type="email"
+                    max={50}
+
                 />
                 <Input
                     isRequired
@@ -130,9 +151,11 @@ export const PurchaseForm: React.FC = () => {
                     labelPlacement="outside"
                     name="numberPhone"
                     value={formData.numberPhone}
-                    onChange={onChange}
+                    onChange={handleInputChange}
                     placeholder="+58 412 1234567"
                     type="text"
+                    max={50}
+
                 />
                 <Input
                     isRequired
@@ -141,9 +164,11 @@ export const PurchaseForm: React.FC = () => {
                     labelPlacement="outside"
                     name="titularyCta"
                     value={formData.titularyCta}
-                    onChange={onChange}
+                    onChange={handleInputChange}
                     placeholder="Nombre del titular"
                     type="text"
+                    max={50}
+
                 />
                 <NumberInput
                     value={formData.quantity}
@@ -152,20 +177,29 @@ export const PurchaseForm: React.FC = () => {
                     label="Número de tickets a comprar"
                     labelPlacement="inside"
                     name="quantity"
-                    onValueChange={onQuantityChange}
+                    onValueChange={value => setFormData(prev => ({ ...prev, quantity: value }))}
                     errorMessage={errors.quantity}
-                />
-                <PurchaseDataTable totalPrice={parseFloat(totalPrice.toString()).toFixed(2)} />
 
+                />
+                <PurchaseDataTable
+
+                    totalPrice={totalPriceFormatted}
+                    onPaymentMethodChange={setPaymentMethod}
+                    setPaymentMethod={setPaymentMethod}
+                    paymentMethod={paymentMethod}
+                />
                 <Input
                     isRequired
                     label="Cargar comprobante"
                     type="file"
                     name="receipt"
-                    onChange={onChange}
+                    accept=".pdf, .jpg, .jpeg, .png"
+                    maxLength={5}
+                    max={5}
+                    onChange={handleInputChange}
                     errorMessage={errors.receipt}
+                    
                 />
-
                 <Input
                     isRequired
                     errorMessage={errors.transactionNumber}
@@ -173,28 +207,34 @@ export const PurchaseForm: React.FC = () => {
                     labelPlacement="outside"
                     name="transactionNumber"
                     value={formData.transactionNumber}
-                    onChange={onChange}
+                    onChange={handleInputChange}
                     placeholder="Pegar número referencia"
                     type="text"
+                    max={50}
+
                 />
-                <div className=" flex gap-2 items-center">
+
+                <div className="flex gap-2 items-center">
                     <strong className="text-xl">
-                        Total compra: {parseFloat(totalPrice.toString()).toFixed(2)} bs
+                        Total compra: {totalPriceFormatted} bs
                     </strong>
                 </div>
 
-                <div className="flex gap-2 m-auto">
+                <div className="flex gap-2 m-auto flex-col">
                     <Button
                         color="primary"
                         variant="shadow"
                         className="font-semibold text-lg px-10"
                         endContent={<IconTicket stroke={2} />}
                         type="submit"
+                        isLoading={loading}
                     >
                         Comprar rifa
                     </Button>
+                    {error && <p className="text-red-500 mt-2">❌ {error}</p>}
                 </div>
             </Form>
         </div>
     );
 };
+

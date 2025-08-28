@@ -37,3 +37,7 @@ export interface RaffleDetailState {
   loading: boolean;
   error: string | null;
 }
+
+export interface RaffleDetailForm {
+  id: string | undefined;
+}

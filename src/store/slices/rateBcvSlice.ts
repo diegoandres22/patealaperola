@@ -20,7 +20,7 @@ const initialState: ScrollState = {
     image: "",
     last_update: "",
     percent: 0,
-    price: 0,
+    price: 180,
     price_old: 0,
     symbol: "",
     title: ""
