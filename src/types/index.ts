@@ -4,4 +4,4 @@
 export * from "./rafflesProps"
 
 //Tipos para elementos
-export * from "./purchaseFormProps"
+export * from "./purchaseProps"

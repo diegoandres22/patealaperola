@@ -41,3 +41,16 @@ export interface RaffleDetailState {
 export interface RaffleDetailForm {
   id: string | undefined;
 }
+
+
+export interface RaffleDataProps  { 
+    description: string | undefined; 
+    id: string | undefined;
+    ticketPrice: number | undefined; 
+    minPurchase: number | undefined; 
+    raffleStatus: number | undefined; 
+    trophy: string | undefined; 
+    secondPrize: string | undefined; 
+    additionalPrize: string | undefined; 
+    loading: boolean;
+}

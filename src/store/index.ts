@@ -5,6 +5,7 @@ import raffleSlice from "./slices/rafflesSlice";
 import banksAcounts from "./slices/banksAcountsSlice";
 import raffleDetail from "./slices/raffleDetailSlice";
 import newPurchase from "./slices/newPurchaseSlide";
+import ticketsValidateByEmail from "./slices/ticketsValidateByEmailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     BanksAcounts: banksAcounts,
     RaffleDetail: raffleDetail,
     purchase: newPurchase,
+    ticketsValidateByEmail: ticketsValidateByEmail,
   },
 });
 

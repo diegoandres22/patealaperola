@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createNewPurchase } from "../services/newPurchaseService";
+import { createNewPurchase } from "../services/purchaseService";
 
 interface PurchaseState {
   loading: boolean;
