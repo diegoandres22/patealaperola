@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Spinner, Tooltip } from '@heroui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '@/store'
-import { fetchRateBcvData } from '@/store/services/rateBcvService'
 
 
 export const RateBcv = () => {
@@ -13,7 +12,6 @@ export const RateBcv = () => {
 
 
     useEffect(() => {
-        dispatch(fetchRateBcvData());
         if (rateBcv) {
             setIsLoading(false);
         }

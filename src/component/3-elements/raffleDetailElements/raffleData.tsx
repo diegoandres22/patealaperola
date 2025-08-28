@@ -1,19 +1,9 @@
+import { RaffleDataProps } from '@/types';
 import { Skeleton } from '@heroui/react';
 import { IconTicket } from '@tabler/icons-react';
 import React, { useEffect } from 'react';
 
 
-type RaffleDataProps = { 
-    description: string | undefined; 
-    id: string | undefined;
-    ticketPrice: number | undefined; 
-    minPurchase: number | undefined; 
-    raffleStatus: number | undefined; 
-    trophy: string | undefined; 
-    secondPrize: string | undefined; 
-    additionalPrize: string | undefined; 
-    loading: boolean;
-}
 
 export const RaffleData: React.FC<RaffleDataProps> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading }) => {
 

@@ -1,18 +1,10 @@
+import { PurchasePayload } from "@/types";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-interface PurchasePayload {
-  buyer_email: string;
-  raffle_id: string;
-  ticket_count: number;
-  payment_method: string;
-  payment_reference: string;
-  full_name: string;
-  phone_number: string;
-  holder_cta_bank: string;
-  file: File | null;
-}
 
-const API_URL = "https://plp-api-fastapi.onrender.com/purchase/";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL + "/purchase/";
+
 
 export const createNewPurchase = createAsyncThunk(
   "purchase/create",
@@ -43,6 +35,25 @@ export const createNewPurchase = createAsyncThunk(
       }
 
       return await response.json();
+    } catch (error: string | unknown) {
+      return rejectWithValue((error as Error).message || "Error desconocido");
+    }
+  }
+);
+
+export const fetchTicketsByEmail = createAsyncThunk(
+  "purchase/fetchTicketsByEmail",
+  async (email: string, { rejectWithValue }) => { // <-- Recibe el email como argumento
+    try {
+      const response = await fetch(
+        API_URL + "tickets-by-email/?email=" + encodeURIComponent(email)
+      );
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData);
+      }
+      const data = await response.json();
+      return data; 
     } catch (error: string | unknown) {
       return rejectWithValue((error as Error).message || "Error desconocido");
     }

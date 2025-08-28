@@ -8,7 +8,7 @@ import { FormData, RaffleDetailForm } from '@/types';
 import { AppDispatch, RootState } from "@/store";
 import { useDispatch, useSelector } from "react-redux";
 import { PurchaseDataTable } from "./purchaseDataTable";
-import { createNewPurchase } from "@/store/services/newPurchaseService";
+import { createNewPurchase } from "@/store/services/purchaseService";
 import { fetchBanks } from "@/store/services/bankAcountsService";
 import { resetSelectedBank } from "@/store/slices/banksAcountsSlice";
 
