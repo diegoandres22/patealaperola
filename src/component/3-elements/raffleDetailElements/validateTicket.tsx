@@ -81,7 +81,12 @@ export const ValidateTicket: React.FC<ValidateTicketProps> = ({ id }) => {
               </div>
             ))
           ) : (
-            <p className="text-sm text-yellow-600 flex gap-1"> {loading && <p> Buscando</p>}{!loading && <p>No se encontraron</p>} tickets para esta rifa.</p>
+            <p className="text-sm text-yellow-600 flex gap-1">
+              {loading && <span>Buscando</span>}
+              {!loading && <span>No se encontraron</span>}
+              tickets para esta rifa.
+            </p>
+
           )}
 
           {otherRaffles.length > 0 && (

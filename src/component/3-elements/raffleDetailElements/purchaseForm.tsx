@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Input, NumberInput } from "@heroui/react";
 import { addToast } from "@heroui/toast";
 import { IconTicket } from "@tabler/icons-react";
@@ -16,6 +16,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
     const dispatch = useDispatch<AppDispatch>();
     const rateBcv = useSelector((state: RootState) => state.RateBcv.price);
     const { loading, success, error } = useSelector((state: RootState) => state.purchase);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const [paymentMethod, setPaymentMethod] = useState<string>("");
     const initialFormData: FormData = {
@@ -71,7 +72,6 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
         setTotalPrice(Math.round(rateBcv * formData.quantity * 100) / 100);
     }, [formData.quantity, rateBcv]);
 
-    // Mostrar toast cuando la compra sea exitosa
     useEffect(() => {
         dispatch(fetchBanks())
         if (success) {
@@ -84,6 +84,8 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
             });
         }
     }, [success, dispatch]);
+
+
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -107,6 +109,9 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
         setPaymentMethod("");
         setErrors({});
         dispatch(resetSelectedBank());
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
     };
 
     const totalPriceFormatted = totalPrice.toFixed(2);
@@ -194,11 +199,12 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     type="file"
                     name="receipt"
                     accept=".pdf, .jpg, .jpeg, .png"
+                    ref={fileInputRef}
                     maxLength={5}
                     max={5}
                     onChange={handleInputChange}
                     errorMessage={errors.receipt}
-                    
+
                 />
                 <Input
                     isRequired
