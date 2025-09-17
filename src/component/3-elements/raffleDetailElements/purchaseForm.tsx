@@ -12,7 +12,7 @@ import { createNewPurchase } from "@/store/services/purchaseService";
 import { fetchBanks } from "@/store/services/bankAcountsService";
 import { resetSelectedBank } from "@/store/slices/banksAcountsSlice";
 
-export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
+export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id, raffle_status }) => {
     const dispatch = useDispatch<AppDispatch>();
     const rateBcv = useSelector((state: RootState) => state.RateBcv.price);
     const { loading, success, error } = useSelector((state: RootState) => state.purchase);
@@ -135,6 +135,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     placeholder="Nombre y apellido"
                     type="text"
                     max={50}
+                    isDisabled={raffle_status !== 1}
                 />
                 <Input
                     isRequired
@@ -147,6 +148,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     placeholder="Email"
                     type="email"
                     max={50}
+                    isDisabled={raffle_status !== 1}
 
                 />
                 <Input
@@ -160,6 +162,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     placeholder="+58 412 1234567"
                     type="text"
                     max={50}
+                    isDisabled={raffle_status !== 1}
 
                 />
                 <Input
@@ -173,6 +176,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     placeholder="Nombre del titular"
                     type="text"
                     max={50}
+                    isDisabled={raffle_status !== 1}
 
                 />
                 <NumberInput
@@ -184,10 +188,11 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     name="quantity"
                     onValueChange={value => setFormData(prev => ({ ...prev, quantity: value }))}
                     errorMessage={errors.quantity}
+                    isDisabled={raffle_status !== 1}
 
                 />
                 <PurchaseDataTable
-
+                    is_Disabled={raffle_status != 1}
                     totalPrice={totalPriceFormatted}
                     onPaymentMethodChange={setPaymentMethod}
                     setPaymentMethod={setPaymentMethod}
@@ -204,6 +209,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     max={5}
                     onChange={handleInputChange}
                     errorMessage={errors.receipt}
+                    isDisabled={raffle_status !== 1}
 
                 />
                 <Input
@@ -217,14 +223,16 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                     placeholder="Pegar número referencia"
                     type="text"
                     max={50}
+                    isDisabled={raffle_status !== 1}
 
                 />
-
-                <div className="flex gap-2 items-center">
-                    <strong className="text-xl">
-                        Total compra: {totalPriceFormatted} bs
-                    </strong>
-                </div>
+                {raffle_status !== 1 ? "" :
+                    <div className="flex gap-2 items-center">
+                        <strong className="text-xl">
+                            Total compra: {totalPriceFormatted} bs
+                        </strong>
+                    </div>
+                }
 
                 <div className="flex gap-2 m-auto flex-col">
                     <Button
@@ -234,6 +242,8 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id }) => {
                         endContent={<IconTicket stroke={2} />}
                         type="submit"
                         isLoading={loading}
+                        isDisabled={raffle_status !== 1}
+
                     >
                         Comprar rifa
                     </Button>

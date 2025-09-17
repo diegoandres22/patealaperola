@@ -32,7 +32,7 @@ export const ValidateTicket: React.FC<ValidateTicketProps> = ({ id }) => {
   const otherRaffles = data.filter((t) => t.raffle_id !== id);
 
   return (
-    <div className="w-full max-w-md flex sm:mx-6 xl:mx-0 mb-6 bg-slate-400/10 p-5 rounded-xl flex-col xl:h-auto xl:max-w-80">
+    <div className="w-full max-w-md max-h-[500px] sm:max-h-96 flex sm:mx-6 xl:mx-0 mb-6 bg-slate-400/10 p-5 rounded-xl flex-col xl:h-auto xl:max-w-80">
       <h4 className="text-2xl mb-3 font-semibold">Validar Tickets Comprados</h4>
 
       <Form className="w-full max-w-xs flex flex-col gap-4" onSubmit={onSubmit} onReset={onReset}>
@@ -59,16 +59,16 @@ export const ValidateTicket: React.FC<ValidateTicketProps> = ({ id }) => {
       </Form>
 
       {hasSearched && (
-        <div className="mt-4">
+        <div className="mt-4 overflow-auto">
           <p className="text-sm text-gray-400 mb-2">
             Tickets encontrados para: <strong>{email}</strong>
           </p>
 
           {currentRaffleTickets.length > 0 ? (
             currentRaffleTickets.map((raffle) => (
-              <div key={raffle.raffle_id} className="mb-3">
+              <div key={raffle.raffle_id} className="mb-3 ">
                 <p className="font-semibold mb-1">Rifa actual:</p>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 ">
                   {raffle.ticket_numbers.map((num) => (
                     <p
                       key={num}

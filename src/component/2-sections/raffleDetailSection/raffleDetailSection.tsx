@@ -3,16 +3,11 @@ import React from 'react'
 import { ArrowAndTitle, ImageRaffle, PurchaseForm, RaffleData } from '@/component/3-elements'
 import { Divider } from '@heroui/react'
 import { ValidateTicket } from '@/component/3-elements/raffleDetailElements/validateTicket'
-import { useSelector } from 'react-redux'
-import { RootState } from '@/store'
 import { RaffleDetailState } from '@/types'
 import { IconExclamationCircle } from '@tabler/icons-react'
 
 
 export const RaffleDetailSection: React.FC<RaffleDetailState> = ({ raffleDetail, loading, error }) => {
-
-
-    const { } = useSelector((state: RootState) => state.RaffleDetail);
 
     if (error) {
         return (
@@ -46,7 +41,7 @@ export const RaffleDetailSection: React.FC<RaffleDetailState> = ({ raffleDetail,
                 <ValidateTicket id={raffleDetail?.id} />
             </div>
             <Divider className="my-1 bg-white/50 w-10/12 mx-auto" />
-            <PurchaseForm id={raffleDetail?.id} />
+            <PurchaseForm id={raffleDetail?.id} raffle_status={raffleDetail?.raffle_status} />
             <div className="px-10 2xl:px-[10%] xl:hidden flex justify-center">
                 <ValidateTicket id={raffleDetail?.id} />
             </div>

@@ -11,13 +11,15 @@ interface PurchaseDataTableProps {
     onPaymentMethodChange: (method: string) => void; // callback para el padre
     paymentMethod: string;                            // estado del padre
     setPaymentMethod: (method: string) => void;       // setter del padre
+    is_Disabled:boolean
 }
 
 export const PurchaseDataTable: React.FC<PurchaseDataTableProps> = ({
     totalPrice,
     onPaymentMethodChange,
     paymentMethod,
-    setPaymentMethod
+    setPaymentMethod,
+    is_Disabled
 }) => {
     const { banksList, selectedBank, loading } = useSelector((state: RootState) => state.BanksAcounts);
     const dispatch = useDispatch<AppDispatch>();
@@ -49,6 +51,7 @@ export const PurchaseDataTable: React.FC<PurchaseDataTableProps> = ({
                 onChange={handleSelectChange}
                 name="paymentMethod"
                 isLoading={loading}
+                isDisabled={is_Disabled}
             >
                 {banksList.map(bank => (
                     <SelectItem
