@@ -1,3 +1,8 @@
+"use client"
+
+// Los componentes de HeroUI usan React Context, que solo funciona en
+// componentes de cliente. Sin esta directiva el servidor falla con
+// "createContext only works in Client Components".
 import React, { useState } from 'react';
 import { Button, Form, Input } from '@heroui/react';
 import { useDispatch, useSelector } from 'react-redux';

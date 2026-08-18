@@ -1,3 +1,8 @@
+"use client"
+
+// Los componentes de HeroUI usan React Context, que solo funciona en
+// componentes de cliente. Sin esta directiva el servidor falla con
+// "createContext only works in Client Components".
 import { RaffleDataProps } from '@/types';
 import { Skeleton } from '@heroui/react';
 import { IconTicket } from '@tabler/icons-react';
