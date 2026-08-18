@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Image } from '@heroui/react';
 import { Skeleton } from '@heroui/react';
 
@@ -9,10 +9,6 @@ type ImageProps = {
 
 export const ImageRaffle: React.FC<ImageProps> = ({ image, loading }) => {
 
-    useEffect(() => {
-
-
-    }, [image, loading]);
 
     return (
         <div className="w-full flex justify-center">

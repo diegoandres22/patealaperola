@@ -1,6 +1,6 @@
 import { Button, Skeleton } from '@heroui/react';
 import { IconArrowLeft } from '@tabler/icons-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 
 type ArrowAndTitleProps = {
@@ -15,9 +15,6 @@ export const ArrowAndTitle = ({ title, loading }: ArrowAndTitleProps): React.JSX
     };
 
 
-    useEffect(() => {
-       
-    }, [title, loading]);
 
     return (
         <div className='w-full md:w-4/5 pt-6 pl-6 flex'>

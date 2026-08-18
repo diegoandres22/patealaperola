@@ -53,7 +53,6 @@ export const fetchTicketsByEmail = createAsyncThunk(
         return rejectWithValue(errorData);
       }
       const data = await response.json();
-      console.log("busco",email)
       return data; 
     } catch (error: string | unknown) {
       return rejectWithValue((error as Error).message || "Error desconocido");

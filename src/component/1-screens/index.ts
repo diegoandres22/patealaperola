@@ -9,3 +9,6 @@ export * from "./rafflesDetailScreen/rafflesDetail";
 
 //Preguntas frecuentes
 export * from "./faqScreen/faqScreen";
+
+//Documentos legales (términos, privacidad, cookies)
+export * from "./legalScreen/legalScreen";

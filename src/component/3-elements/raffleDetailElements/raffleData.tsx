@@ -1,15 +1,12 @@
 import { RaffleDataProps } from '@/types';
 import { Skeleton } from '@heroui/react';
 import { IconTicket } from '@tabler/icons-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 
 
 export const RaffleData: React.FC<RaffleDataProps> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading }) => {
 
-  useEffect(() => {
-  
-  }, [description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading]);
 
     return (
         <div className='flex flex-col sm:mx-6 px-10 2xl:px-[10%] gap-2'>

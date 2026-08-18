@@ -1,4 +1,9 @@
+"use client"
 
+// Faltaba la directiva "use client" pese a usar hooks: funcionaba solo porque
+// hasta ahora únicamente lo importaban componentes que ya eran de cliente. En
+// cuanto un componente de servidor lo alcanzaba (vía el barrel de 2-sections),
+// el build fallaba.
 import React, { useEffect, useState } from 'react'
 import { Spinner, Tooltip } from '@heroui/react'
 import { useDispatch, useSelector } from 'react-redux'

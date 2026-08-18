@@ -11,3 +11,6 @@ export * from "./raffleDetailElements/purchaseDataTable"
 
 //Logo navbar
 export * from "./logoImage";
+
+//Consentimiento de cookies
+export * from "./cookieConsent";
