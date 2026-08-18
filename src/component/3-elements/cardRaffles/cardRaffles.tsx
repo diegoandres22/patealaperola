@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardFooter, CardHeader, Chip, Link } from '@heroui/react'
-import { Image } from "@heroui/image";
+import { Image } from "@heroui/react";
 import { Raffle } from '@/types';
 
 

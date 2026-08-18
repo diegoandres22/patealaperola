@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image } from '@heroui/image';
+import { Image } from '@heroui/react';
 import { Skeleton } from '@heroui/react';
 
 type ImageProps = {

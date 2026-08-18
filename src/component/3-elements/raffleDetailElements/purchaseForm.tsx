@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Input, NumberInput } from "@heroui/react";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import { IconTicket } from "@tabler/icons-react";
 import { FormData, RaffleDetailForm } from '@/types';
 import { AppDispatch, RootState } from "@/store";
