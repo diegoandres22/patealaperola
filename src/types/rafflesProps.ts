@@ -53,5 +53,13 @@ export interface RaffleDataProps {
   trophy: string | undefined;
   secondPrize: string | undefined;
   additionalPrize: string | undefined;
+  // La API devuelve null en los que el admin no marcó al crear la rifa
+  // (ver PLP_API-FastApi/src/schemas/raffle_schema.py: Optional[int] = None).
+  premiumTicket1: number | string | null | undefined;
+  premiumTicket2: number | string | null | undefined;
+  premiumTicket3: number | string | null | undefined;
+  premiumTicket4: number | string | null | undefined;
+  premiumTicket5: number | string | null | undefined;
+  premiumTicket6: number | string | null | undefined;
   loading: boolean;
 }

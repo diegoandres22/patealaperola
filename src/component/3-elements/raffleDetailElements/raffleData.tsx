@@ -10,7 +10,16 @@ import React from 'react';
 
 
 
-export const RaffleData: React.FC<RaffleDataProps> = ({ description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading }) => {
+export const RaffleData: React.FC<RaffleDataProps> = ({
+    description, ticketPrice, minPurchase, trophy, secondPrize, additionalPrize, loading,
+    premiumTicket1, premiumTicket2, premiumTicket3, premiumTicket4, premiumTicket5, premiumTicket6,
+}) => {
+    // Antes esta lista estaba hardcodeada ("6666","7777","1982","9944": datos
+    // de prueba que nunca se conectaron a la rifa real). Ahora sale de los
+    // premium_ticketN reales de la rifa, filtrando los que el admin no marcó
+    // (la API los manda como null).
+    const premiumTickets = [premiumTicket1, premiumTicket2, premiumTicket3, premiumTicket4, premiumTicket5, premiumTicket6]
+        .filter((ticket): ticket is number | string => ticket !== null && ticket !== undefined && ticket !== "");
 
 
     return (
@@ -52,8 +61,10 @@ export const RaffleData: React.FC<RaffleDataProps> = ({ description, ticketPrice
                             <Skeleton className="rounded-md w-full h-full">
                                 <div className="h-10 w-full rounded-lg" />
                             </Skeleton>
+                        ) : premiumTickets.length === 0 ? (
+                            <p className="text-sm text-neutral-400">Ninguno</p>
                         ) : (
-                            (["6666", "7777", "1982", "9944"]).map((ticket, index) => (
+                            premiumTickets.map((ticket, index) => (
                                 <div key={index} className="w-1/2 h-1/2 flex items-center justify-center my-1">
                                     <p className="border-1 p-1 rounded-md">{ticket}</p>
                                 </div>
