@@ -1,6 +1,5 @@
 // barra de busqueda
 export * from "./navbarSection/navbarSection";
-export * from "./navbarSection/rateBcv";
 
 // pie de pagina
 export * from "./footerSection/footerSection";

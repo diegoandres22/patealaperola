@@ -74,7 +74,7 @@ export const PurchaseDataTable: React.FC<PurchaseDataTableProps> = ({
                             { label: 'Telefono', value: selectedBank.number_cta_1 },
                             { label: 'Email', value: selectedBank.email_cta },
                             { label: 'Número', value: selectedBank.number_cta_2 },
-                            { label: 'Total', value: `${totalPrice} Bs` },
+                            { label: 'Total', value: `${totalPrice}$` },
                         ].map((row, index) => (
                             <TableRow key={index}>
                                 <TableCell>{row.label}</TableCell>

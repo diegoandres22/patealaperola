@@ -41,6 +41,9 @@ export interface RaffleDetailState {
 export interface RaffleDetailForm {
   id: string | undefined;
   raffle_status: number | undefined;
+  // Antes el total se calculaba con la tasa BCV (bs); ahora la app trabaja
+  // solo en $, con el precio real del ticket.
+  ticketPrice: number | undefined;
 }
 
 

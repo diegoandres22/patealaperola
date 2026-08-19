@@ -47,7 +47,7 @@ export const RaffleDetailSection: React.FC<RaffleDetailState> = ({ raffleDetail,
                 <ValidateTicket id={raffleDetail?.id} />
             </div>
             <Divider className="my-1 bg-white/50 w-10/12 mx-auto" />
-            <PurchaseForm id={raffleDetail?.id} raffle_status={raffleDetail?.raffle_status} />
+            <PurchaseForm id={raffleDetail?.id} raffle_status={raffleDetail?.raffle_status} ticketPrice={raffleDetail?.ticket_price} />
             <div className="px-10 2xl:px-[10%] xl:hidden flex justify-center">
                 <ValidateTicket id={raffleDetail?.id} />
             </div>
