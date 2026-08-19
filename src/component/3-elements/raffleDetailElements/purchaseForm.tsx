@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Input, NumberInput } from "@heroui/react";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@heroui/react";
 import { IconTicket } from "@tabler/icons-react";
 import { FormData, RaffleDetailForm } from '@/types';
 import { AppDispatch, RootState } from "@/store";
@@ -12,9 +12,8 @@ import { createNewPurchase } from "@/store/services/purchaseService";
 import { fetchBanks } from "@/store/services/bankAcountsService";
 import { resetSelectedBank } from "@/store/slices/banksAcountsSlice";
 
-export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id, raffle_status }) => {
+export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id, raffle_status, ticketPrice }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const rateBcv = useSelector((state: RootState) => state.RateBcv.price);
     const { loading, success, error } = useSelector((state: RootState) => state.purchase);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -69,8 +68,11 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id, raffle_status }) 
 
 
     useEffect(() => {
-        setTotalPrice(Math.round(rateBcv * formData.quantity * 100) / 100);
-    }, [formData.quantity, rateBcv]);
+        // Antes esto multiplicaba la tasa BCV (bs) por la cantidad, sin usar
+        // el precio real del ticket en ningún momento. Ahora es simplemente
+        // precio en $ x cantidad, sin conversión de moneda.
+        setTotalPrice(Math.round((ticketPrice ?? 0) * formData.quantity * 100) / 100);
+    }, [formData.quantity, ticketPrice]);
 
     useEffect(() => {
         dispatch(fetchBanks())
@@ -229,7 +231,7 @@ export const PurchaseForm: React.FC<RaffleDetailForm> = ({ id, raffle_status }) 
                 {raffle_status !== 1 ? "" :
                     <div className="flex gap-2 items-center">
                         <strong className="text-xl">
-                            Total compra: {totalPriceFormatted} bs
+                            Total compra: {totalPriceFormatted}$
                         </strong>
                     </div>
                 }

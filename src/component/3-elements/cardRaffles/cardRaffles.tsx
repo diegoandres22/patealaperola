@@ -1,6 +1,11 @@
+"use client"
+
+// Los componentes de HeroUI usan React Context, que solo funciona en
+// componentes de cliente. Sin esta directiva el servidor falla con
+// "createContext only works in Client Components".
 import React from 'react'
 import { Card, CardFooter, CardHeader, Chip, Link } from '@heroui/react'
-import { Image } from "@heroui/image";
+import { Image } from "@heroui/react";
 import { Raffle } from '@/types';
 
 

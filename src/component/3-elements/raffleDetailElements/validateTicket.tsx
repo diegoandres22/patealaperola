@@ -1,3 +1,8 @@
+"use client"
+
+// Los componentes de HeroUI usan React Context, que solo funciona en
+// componentes de cliente. Sin esta directiva el servidor falla con
+// "createContext only works in Client Components".
 import React, { useState } from 'react';
 import { Button, Form, Input } from '@heroui/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -34,6 +39,9 @@ export const ValidateTicket: React.FC<ValidateTicketProps> = ({ id }) => {
   return (
     <div className="w-full max-w-md max-h-[500px] sm:max-h-96 flex sm:mx-6 xl:mx-0 mb-6 bg-slate-400/10 p-5 rounded-xl flex-col xl:h-auto xl:max-w-80">
       <h4 className="text-2xl mb-3 font-semibold">Validar Tickets Comprados</h4>
+      <p className="text-xs text-gray-400 mb-3">
+        Tus números aparecen aquí solo después de que tu compra sea aprobada por el equipo de Patea la Perola. Si acabas de comprar, espera la confirmación antes de validar.
+      </p>
 
       <Form className="w-full max-w-xs flex flex-col gap-4" onSubmit={onSubmit} onReset={onReset}>
         <Input
@@ -81,12 +89,18 @@ export const ValidateTicket: React.FC<ValidateTicketProps> = ({ id }) => {
               </div>
             ))
           ) : (
-            <p className="text-sm text-yellow-600 flex gap-1">
-              {loading && <span>Buscando</span>}
-              {!loading && <span>No se encontraron</span>}
-              tickets para esta rifa.
-            </p>
-
+            <div className="text-sm text-yellow-600">
+              <p className="flex gap-1">
+                {loading && <span>Buscando</span>}
+                {!loading && <span>No se encontraron</span>}
+                tickets para esta rifa.
+              </p>
+              {!loading && (
+                <p className="text-xs text-gray-400 mt-1">
+                  Recuerda: los tickets solo aparecen aquí una vez que tu compra fue aprobada. Si tu compra está pendiente de revisión, todavía no va a salir.
+                </p>
+              )}
+            </div>
           )}
 
           {otherRaffles.length > 0 && (

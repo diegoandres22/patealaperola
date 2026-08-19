@@ -8,7 +8,7 @@ export interface Raffle {
   total_tickets: number;
   description: string;
   additionalPrize: string;
-  tickets_sold_list: Array<string>;
+  tickets_sold_list: Array<number>;
   premium_ticket1: string;
   lottery_date: string;
   ticket_price: number;
@@ -41,6 +41,9 @@ export interface RaffleDetailState {
 export interface RaffleDetailForm {
   id: string | undefined;
   raffle_status: number | undefined;
+  // Antes el total se calculaba con la tasa BCV (bs); ahora la app trabaja
+  // solo en $, con el precio real del ticket.
+  ticketPrice: number | undefined;
 }
 
 
@@ -53,5 +56,13 @@ export interface RaffleDataProps {
   trophy: string | undefined;
   secondPrize: string | undefined;
   additionalPrize: string | undefined;
+  // La API devuelve null en los que el admin no marcó al crear la rifa
+  // (ver PLP_API-FastApi/src/schemas/raffle_schema.py: Optional[int] = None).
+  premiumTicket1: number | string | null | undefined;
+  premiumTicket2: number | string | null | undefined;
+  premiumTicket3: number | string | null | undefined;
+  premiumTicket4: number | string | null | undefined;
+  premiumTicket5: number | string | null | undefined;
+  premiumTicket6: number | string | null | undefined;
   loading: boolean;
 }

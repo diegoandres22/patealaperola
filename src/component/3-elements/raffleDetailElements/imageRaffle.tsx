@@ -1,5 +1,10 @@
-import React, { useEffect } from 'react';
-import { Image } from '@heroui/image';
+"use client"
+
+// Los componentes de HeroUI usan React Context, que solo funciona en
+// componentes de cliente. Sin esta directiva el servidor falla con
+// "createContext only works in Client Components".
+import React from 'react';
+import { Image } from '@heroui/react';
 import { Skeleton } from '@heroui/react';
 
 type ImageProps = {
@@ -9,10 +14,6 @@ type ImageProps = {
 
 export const ImageRaffle: React.FC<ImageProps> = ({ image, loading }) => {
 
-    useEffect(() => {
-
-
-    }, [image, loading]);
 
     return (
         <div className="w-full flex justify-center">

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Button, Select, SelectItem, addToast } from '@heroui/react';
 import { IconCopy, IconCreditCardPay } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +37,6 @@ export const PurchaseDataTable: React.FC<PurchaseDataTableProps> = ({
             .catch(err => console.error('Error al copiar al portapapeles:', err));
     };
 
-    useEffect(() => {
-
-    }, [dispatch, loading, selectedBank]);
     return (
         <div className="flex flex-col w-full gap-4">
             <Select
@@ -77,7 +74,7 @@ export const PurchaseDataTable: React.FC<PurchaseDataTableProps> = ({
                             { label: 'Telefono', value: selectedBank.number_cta_1 },
                             { label: 'Email', value: selectedBank.email_cta },
                             { label: 'Número', value: selectedBank.number_cta_2 },
-                            { label: 'Total', value: `${totalPrice} Bs` },
+                            { label: 'Total', value: `${totalPrice}$` },
                         ].map((row, index) => (
                             <TableRow key={index}>
                                 <TableCell>{row.label}</TableCell>

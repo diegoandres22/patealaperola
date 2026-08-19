@@ -30,18 +30,24 @@ export const RaffleDetailSection: React.FC<RaffleDetailState> = ({ raffleDetail,
                     description={raffleDetail?.description} id={raffleDetail?.id} ticketPrice={raffleDetail?.ticket_price}
                     minPurchase={raffleDetail?.min_purchase} raffleStatus={raffleDetail?.raffle_status}
                     trophy={raffleDetail?.trophy} secondPrize={raffleDetail?.secondPrize}
-                    additionalPrize={raffleDetail?.additionalPrize} loading={loading} />
+                    additionalPrize={raffleDetail?.additionalPrize} loading={loading}
+                    premiumTicket1={raffleDetail?.premium_ticket1} premiumTicket2={raffleDetail?.premium_ticket2}
+                    premiumTicket3={raffleDetail?.premium_ticket3} premiumTicket4={raffleDetail?.premium_ticket4}
+                    premiumTicket5={raffleDetail?.premium_ticket5} premiumTicket6={raffleDetail?.premium_ticket6} />
             </div>
             <div className=" hidden xl:flex">
                 <RaffleData
                     description={raffleDetail?.description} id={raffleDetail?.id} ticketPrice={raffleDetail?.ticket_price}
                     minPurchase={raffleDetail?.min_purchase} raffleStatus={raffleDetail?.raffle_status}
                     trophy={raffleDetail?.trophy} secondPrize={raffleDetail?.secondPrize}
-                    additionalPrize={raffleDetail?.additionalPrize} loading={loading} />
+                    additionalPrize={raffleDetail?.additionalPrize} loading={loading}
+                    premiumTicket1={raffleDetail?.premium_ticket1} premiumTicket2={raffleDetail?.premium_ticket2}
+                    premiumTicket3={raffleDetail?.premium_ticket3} premiumTicket4={raffleDetail?.premium_ticket4}
+                    premiumTicket5={raffleDetail?.premium_ticket5} premiumTicket6={raffleDetail?.premium_ticket6} />
                 <ValidateTicket id={raffleDetail?.id} />
             </div>
             <Divider className="my-1 bg-white/50 w-10/12 mx-auto" />
-            <PurchaseForm id={raffleDetail?.id} raffle_status={raffleDetail?.raffle_status} />
+            <PurchaseForm id={raffleDetail?.id} raffle_status={raffleDetail?.raffle_status} ticketPrice={raffleDetail?.ticket_price} />
             <div className="px-10 2xl:px-[10%] xl:hidden flex justify-center">
                 <ValidateTicket id={raffleDetail?.id} />
             </div>
