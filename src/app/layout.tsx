@@ -14,7 +14,12 @@ const geistSans = Geist({
   display: "swap",
 });
 
+// Sin metadataBase, Next no sabe resolver URLs absolutas (og:url, canonical)
+// y cae en "http://localhost:3000" por defecto — incluso en producción. Eso
+// hacía que la vista previa al compartir apuntara a localhost en vez de al
+// dominio real.
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://patealaperola.vercel.app"),
   title: "Patea la perola",
   description: "Participa ya y gana muchos premios",
 };

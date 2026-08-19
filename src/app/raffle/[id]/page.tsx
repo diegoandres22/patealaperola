@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         const raffle = await getRaffleById(id)
         const title = `${raffle.title} — Patea la Perola`
         const description = `${raffle.trophy ? `Gana: ${raffle.trophy}. ` : ''}Boletos desde $${raffle.ticket_price} c/u. ¡Participa ya!`
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://patealaperola.vercel.app'
 
         return {
             title,
@@ -28,6 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             openGraph: {
                 title,
                 description,
+                url: `${siteUrl}/raffle/${id}`,
                 images: raffle.image ? [{ url: raffle.image, width: 1200, height: 630, alt: raffle.title }] : undefined,
                 type: 'website',
             },
